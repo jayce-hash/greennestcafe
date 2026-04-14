@@ -3,401 +3,618 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Green Nest Cafe | Sip, Relax & Reflect</title>
+<title>Green Nest Cafe — Sip, Relax & Reflect</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
 :root {
-  --sage:       #687c4b;
-  --sage-deep:  #4a6030;
-  --sage-dark:  #3a5025;
-  --sage-light: #a0b080;
-  --sage-pale:  #edf0e5;
-  --white:      #FFFFFF;
-  --warm-white: #FAF8F5;
-  --linen:      #F2EDE6;
-  --linen-deep: #E5DDD2;
-  --wood:       #B08B6E;
-  --text:       #2A2318;
-  --text-mid:   #5A4A3A;
-  --text-soft:  #8A7A6A;
+  --green:   #687c4b;
+  --green-d: #4a5c32;
+  --green-l: #8fa070;
+  --green-p: #f0f3eb;
+  --cream:   #faf8f4;
+  --sand:    #f0ebe2;
+  --stone:   #e2dbd0;
+  --ink:     #1e1e1a;
+  --mid:     #5a5549;
+  --muted:   #9a9186;
+  --white:   #ffffff;
 }
 
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body { font-family:'Jost',sans-serif; background:var(--warm-white); color:var(--text); overflow-x:hidden; }
-::-webkit-scrollbar { width:4px; }
-::-webkit-scrollbar-track { background:var(--linen); }
-::-webkit-scrollbar-thumb { background:var(--sage-light); border-radius:2px; }
+html { scroll-behavior: smooth; font-size: 16px; }
 
-/* ── LOADER ── */
-.loader { position:fixed; inset:0; z-index:9000; background:var(--sage); display:flex; align-items:center; justify-content:center; transition:opacity 0.8s, visibility 0.8s; }
-.loader.done { opacity:0; visibility:hidden; pointer-events:none; }
-.loader-logo { width:120px; opacity:0; animation:fadeUp 0.8s ease 0.3s forwards; }
-@keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
 
-/* ── HEADER ── */
-header {
-  position:fixed; top:0; left:0; right:0; z-index:200;
-  padding:0 5vw; height:72px;
-  display:flex; justify-content:space-between; align-items:center;
-  transition:background 0.5s, box-shadow 0.5s;
+/* ===================== NAV ===================== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5vw; height: 68px;
+  transition: background 0.4s, box-shadow 0.4s;
 }
-header.scrolled {
-  background:rgba(250,248,245,0.97);
-  backdrop-filter:blur(16px);
-  box-shadow:0 1px 0 var(--linen-deep);
+nav.solid {
+  background: rgba(250,248,244,0.96);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--stone);
 }
-.header-left { display:flex; align-items:center; gap:0.75rem; text-decoration:none; }
-.header-logo-img {
-  width:44px; height:44px; border-radius:50%; object-fit:cover; flex-shrink:0;
-  /* PNG has sage bg — shows naturally on sage hero, invert on white header */
-  transition:filter 0.5s;
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo img { height: 40px; width: auto; }
+.nav-logo-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; font-weight: 500;
+  color: var(--white); letter-spacing: 0.03em;
+  transition: color 0.4s;
 }
-header.scrolled .header-logo-img { /* natural on white */ }
-.header-brand-col { display:flex; flex-direction:column; gap:2px; }
-.header-brand-name {
-  font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:500;
-  color:var(--white); letter-spacing:0.04em; line-height:1;
-  transition:color 0.5s;
-}
-header.scrolled .header-brand-name { color:var(--sage-deep); }
-.header-brand-tag {
-  font-size:0.45rem; font-weight:300; letter-spacing:0.32em; text-transform:uppercase;
-  color:rgba(255,255,255,0.5); transition:color 0.5s;
-}
-header.scrolled .header-brand-tag { color:var(--text-soft); }
-nav { display:flex; gap:2.5rem; align-items:center; }
-nav a {
-  font-size:0.65rem; font-weight:400; letter-spacing:0.22em; text-transform:uppercase;
-  color:rgba(255,255,255,0.75); text-decoration:none; transition:color 0.3s;
-}
-header.scrolled nav a { color:var(--text-mid); }
-nav a:hover { color:var(--white); }
-header.scrolled nav a:hover { color:var(--sage); }
-.nav-visit {
-  border:1px solid rgba(255,255,255,0.45); border-radius:50px;
-  padding:0.45rem 1.4rem; color:var(--white)!important;
-  transition:background 0.3s, border-color 0.3s!important;
-}
-.nav-visit:hover { background:rgba(255,255,255,0.12)!important; }
-header.scrolled .nav-visit { border-color:var(--sage); color:var(--white)!important; background:var(--sage); }
-header.scrolled .nav-visit:hover { background:var(--sage-deep)!important; }
+nav.solid .nav-logo-text { color: var(--green-d); }
 
-/* ── HERO ── */
+.nav-links { display: flex; align-items: center; gap: 2rem; }
+.nav-links a {
+  font-size: 0.7rem; font-weight: 400; letter-spacing: 0.15em;
+  text-transform: uppercase; color: rgba(255,255,255,0.8);
+  text-decoration: none; transition: color 0.3s;
+}
+nav.solid .nav-links a { color: var(--mid); }
+.nav-links a:hover { color: var(--white); }
+nav.solid .nav-links a:hover { color: var(--green); }
+
+.nav-cta {
+  font-size: 0.68rem; font-weight: 500; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--white) !important;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.5);
+  padding: 0.5rem 1.2rem; border-radius: 100px;
+  text-decoration: none; transition: all 0.3s;
+}
+nav.solid .nav-cta {
+  color: var(--white) !important;
+  background: var(--green); border-color: var(--green);
+}
+.nav-cta:hover { background: rgba(255,255,255,0.15) !important; }
+nav.solid .nav-cta:hover { background: var(--green-d) !important; border-color: var(--green-d) !important; }
+
+/* Mobile nav toggle */
+.nav-burger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.nav-burger span {
+  display: block; width: 22px; height: 1.5px;
+  background: var(--white); transition: all 0.3s;
+}
+nav.solid .nav-burger span { background: var(--ink); }
+
+.mobile-menu {
+  display: none; position: fixed; inset: 0; z-index: 99;
+  background: var(--green-d); flex-direction: column;
+  align-items: center; justify-content: center; gap: 2.5rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem; font-weight: 400;
+  color: var(--white); text-decoration: none;
+  letter-spacing: 0.05em; opacity: 0.9;
+}
+.mobile-menu a:hover { opacity: 1; }
+.mobile-close {
+  position: absolute; top: 1.5rem; right: 5vw;
+  background: none; border: none; cursor: pointer;
+  font-size: 1.5rem; color: var(--white); opacity: 0.7;
+}
+
+/* ===================== HERO ===================== */
 .hero {
-  min-height:100vh; background:#687c4b;
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  text-align:center; position:relative; overflow:hidden;
-  padding:6rem 2rem 4rem;
+  min-height: 100svh; background: var(--green);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; padding: 100px 6vw 60px;
+  position: relative; overflow: hidden;
 }
-.hero::after {
-  content:''; position:absolute; inset:0; pointer-events:none;
-  background:radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(30,45,20,0.18) 100%);
+/* Subtle texture overlay */
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(255,255,255,0.04) 0%, transparent 70%);
+  pointer-events: none;
 }
-.hero-content {
-  position:relative; z-index:2;
-  display:flex; flex-direction:column; align-items:center;
+.hero-logo {
+  width: clamp(100px, 14vw, 160px);
+  height: auto; margin-bottom: clamp(2rem, 4vw, 3.5rem);
+  position: relative; z-index: 1;
 }
-/* Logo */
-.hero-content > img {
-  width:clamp(130px,16vw,190px);
-  height:auto;
-  object-fit:contain;
-  display:block;
-  margin:0 auto 3rem;
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(5.5rem, 15vw, 14rem);
+  font-weight: 600; color: var(--white);
+  line-height: 0.85; letter-spacing: -0.01em;
+  position: relative; z-index: 1;
+  margin-bottom: 0.3em;
 }
-/* GREEN NEST — massive, tight, centered */
-.hero-h1 {
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(6rem,16vw,15rem);
-  font-weight:600;
-  color:#ffffff;
-  line-height:0.82;
-  letter-spacing:0.01em;
-  text-align:center;
-  margin:0 0 0.5rem 0;
-}
-/* CAFE — light weight, very spaced */
-.hero-cafe {
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(2rem,5vw,5rem);
-  font-weight:300;
-  color:rgba(255,255,255,0.55);
-  letter-spacing:0.55em;
-  text-transform:uppercase;
-  text-align:center;
-  margin:0 0 2.5rem 0;
-  padding-left:0.55em; /* compensate letter-spacing so it looks centered */
-}
-.hero-rule { width:32px; height:1px; background:rgba(255,255,255,0.28); margin:0 auto 1.8rem; }
 .hero-sub {
-  font-size:0.6rem; font-weight:300; letter-spacing:0.45em; text-transform:uppercase;
-  color:rgba(255,255,255,0.38); margin-bottom:2.8rem;
-  padding-left:0.45em;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 4vw, 3.5rem);
+  font-weight: 300; color: rgba(255,255,255,0.5);
+  letter-spacing: 0.5em; text-transform: uppercase;
+  padding-left: 0.5em; /* visual centering with letter-spacing */
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  position: relative; z-index: 1;
 }
-.hero-desc {
-  font-size:1rem; font-weight:300; line-height:1.9;
-  color:rgba(255,255,255,0.58); max-width:42ch; margin:0 auto 3rem;
+.hero-tagline {
+  font-size: 0.65rem; font-weight: 300;
+  letter-spacing: 0.4em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  padding-left: 0.4em;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  position: relative; z-index: 1;
 }
-.hero-btns { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
-.btn-solid {
-  background:#ffffff; color:#4a6030;
-  padding:0.85rem 2.2rem; border-radius:50px;
-  font-size:0.65rem; font-weight:500; letter-spacing:0.18em; text-transform:uppercase;
-  text-decoration:none; transition:all 0.3s;
+.hero-actions {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  justify-content: center; position: relative; z-index: 1;
 }
-.btn-solid:hover { background:#edf0e5; transform:translateY(-2px); }
-.btn-outline {
-  border:1px solid rgba(255,255,255,0.38); color:#ffffff;
-  padding:0.85rem 2.2rem; border-radius:50px;
-  font-size:0.65rem; font-weight:300; letter-spacing:0.18em; text-transform:uppercase;
-  text-decoration:none; transition:all 0.3s;
+.btn-primary {
+  background: var(--white); color: var(--green-d);
+  padding: 0.9rem 2rem; border-radius: 100px;
+  font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em;
+  text-transform: uppercase; text-decoration: none;
+  transition: all 0.3s;
 }
-.btn-outline:hover { border-color:rgba(255,255,255,0.8); background:rgba(255,255,255,0.07); }
-.scroll-hint {
-  position:absolute; bottom:2rem; left:50%; transform:translateX(-50%);
-  display:flex; flex-direction:column; align-items:center; gap:6px;
-  color:rgba(255,255,255,0.28); font-size:0.5rem; letter-spacing:0.25em; text-transform:uppercase;
-  animation:bob 3s ease-in-out infinite;
+.btn-primary:hover { background: var(--cream); transform: translateY(-2px); }
+.btn-secondary {
+  background: transparent; color: var(--white);
+  border: 1px solid rgba(255,255,255,0.4);
+  padding: 0.9rem 2rem; border-radius: 100px;
+  font-size: 0.7rem; font-weight: 400; letter-spacing: 0.12em;
+  text-transform: uppercase; text-decoration: none;
+  transition: all 0.3s;
 }
-.scroll-hint-line { width:1px; height:28px; background:linear-gradient(to bottom,rgba(255,255,255,0.28),transparent); }
-@keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-6px)} }
-
-/* ── MARQUEE/* ── MARQUEE ── */
-.marquee { background:var(--sage-dark); padding:0.8rem 0; overflow:hidden; }
-.marquee-track { display:flex; white-space:nowrap; animation:scroll 26s linear infinite; }
-@keyframes scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-.marquee-item {
-  display:inline-flex; align-items:center; gap:1.5rem; padding:0 2rem;
-  font-size:0.56rem; font-weight:300; letter-spacing:0.28em; text-transform:uppercase;
-  color:rgba(255,255,255,0.45);
+.btn-secondary:hover { border-color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.08); }
+.hero-scroll {
+  position: absolute; bottom: 2rem; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  color: rgba(255,255,255,0.3); font-size: 0.5rem;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  animation: scrollbob 2.5s ease-in-out infinite;
 }
-.mdot { color:rgba(255,255,255,0.18); }
-
-/* ── SHARED SECTION STYLES ── */
-.section { padding:clamp(5rem,9vw,9rem) 5vw; }
-.section-white { background:var(--white); }
-.section-linen { background:var(--linen); }
-.section-sage { background:var(--sage); }
-.inner { max-width:1200px; margin:0 auto; }
-.eyebrow {
-  font-size:0.56rem; font-weight:400; letter-spacing:0.42em; text-transform:uppercase;
-  color:var(--sage); display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;
+.hero-scroll-line { width: 1px; height: 32px; background: linear-gradient(rgba(255,255,255,0.3), transparent); }
+@keyframes scrollbob {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-6px); }
 }
-.ey-line { width:18px; height:1px; background:var(--sage-light); flex-shrink:0; }
-.h2 {
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(3.2rem,5.5vw,5.5rem); font-weight:500;
-  line-height:1.05; letter-spacing:-0.01em; color:var(--text); margin-bottom:1.5rem;
+
+/* ===================== TICKER ===================== */
+.ticker {
+  background: var(--green-d); overflow: hidden;
+  padding: 0.75rem 0; border-top: 1px solid rgba(255,255,255,0.08);
 }
-.h2 em { font-style:italic; color:var(--sage); }
-.h2-light { color:var(--white); }
-.h2-light em { color:rgba(255,255,255,0.55); }
-
-/* ── ABOUT ── */
-.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:6vw; align-items:center; }
-.about-p { font-size:1.05rem; font-weight:300; line-height:2; color:var(--text-soft); margin-bottom:1.6rem; max-width:48ch; }
-.about-p strong { color:var(--text-mid); font-weight:500; }
-.about-visual { display:flex; flex-direction:column; align-items:center; gap:2rem; }
-
-
-
-
-
-
-.about-stats { display:flex; gap:3rem; justify-content:center; }
-.astat { text-align:center; }
-.astat-n { font-family:'Cormorant Garamond',serif; font-size:2.2rem; font-weight:500; color:var(--sage); line-height:1; }
-.astat-l { font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-soft); margin-top:5px; }
-
-/* ── MENU ── */
-.tab-bar { display:flex; border-bottom:1.5px solid var(--linen-deep); margin-bottom:3rem; flex-wrap:wrap; }
-.tab-btn {
-  background:none; border:none; padding:0.85rem 2rem;
-  font-family:'Jost',sans-serif; font-size:0.65rem; font-weight:400;
-  letter-spacing:0.2em; text-transform:uppercase; color:var(--text-soft);
-  cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1.5px; transition:color 0.3s;
+.ticker-track {
+  display: flex; white-space: nowrap;
+  animation: tick 30s linear infinite;
 }
-.tab-btn:hover { color:var(--sage); }
-.tab-btn.active { color:var(--sage-deep); font-weight:500; border-bottom-color:var(--sage); }
-.tab-panel { display:none; }
-.tab-panel.active { display:block; }
-.mshead {
-  font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:600;
-  text-transform:uppercase; letter-spacing:0.06em; color:var(--text);
-  background:var(--sage-pale); padding:0.5rem 1rem; border-radius:5px;
-  margin:2.5rem 0 1rem; display:flex; justify-content:space-between; align-items:center;
+@keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.ticker-item {
+  display: inline-flex; align-items: center; gap: 1.5rem;
+  padding: 0 2rem; font-size: 0.6rem; font-weight: 300;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
 }
-.mshead:first-child { margin-top:0; }
-.msnote { font-size:0.54rem; letter-spacing:0.1em; color:var(--text-soft); font-family:'Jost',sans-serif; font-weight:300; text-transform:uppercase; }
-.mrow { display:flex; justify-content:space-between; align-items:baseline; padding:0.75rem 0; border-bottom:1px solid var(--linen-deep); gap:1rem; }
-.mrow:last-child { border-bottom:none; }
-.mleft { flex:1; display:flex; flex-direction:column; gap:3px; }
-.mname { font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-weight:500; color:var(--text); }
-.mdesc { font-size:0.7rem; font-weight:300; color:var(--text-soft); line-height:1.5; }
-.mprice { font-family:'Cormorant Garamond',serif; font-size:0.95rem; font-weight:400; color:var(--sage-deep); white-space:nowrap; flex-shrink:0; }
-.mtag { display:inline-block; font-size:0.46rem; letter-spacing:0.15em; text-transform:uppercase; background:var(--sage-pale); color:var(--sage-deep); padding:0.1rem 0.5rem; border-radius:20px; margin-left:0.35rem; font-family:'Jost',sans-serif; vertical-align:middle; }
-.two-col { display:grid; grid-template-columns:1fr 1fr; gap:0 4rem; }
+.ticker-dot { color: rgba(255,255,255,0.2); }
 
-/* ── STAT STRIP ── */
-.strip { background:var(--sage-dark); padding:3.5rem 5vw; display:flex; justify-content:center; align-items:center; gap:5vw; flex-wrap:wrap; }
-.strip-item { text-align:center; }
-.strip-num { font-family:'Cormorant Garamond',serif; font-size:2.8rem; font-weight:500; color:var(--white); line-height:1; }
-.strip-lbl { font-size:0.55rem; letter-spacing:0.24em; text-transform:uppercase; color:rgba(255,255,255,0.42); margin-top:5px; }
-.strip-div { width:1px; height:40px; background:rgba(255,255,255,0.12); }
+/* ===================== SHARED ===================== */
+section { padding: clamp(4rem, 8vw, 8rem) 5vw; }
+.container { max-width: 1160px; margin: 0 auto; }
 
-/* ── REVIEWS ── */
-.reviews-top { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3.5rem; flex-wrap:wrap; gap:2rem; }
-.reviews-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
-.rcard { background:var(--white); border-radius:12px; padding:1.8rem; border:1px solid var(--linen-deep); transition:transform 0.3s,box-shadow 0.3s; }
-.rcard:hover { transform:translateY(-3px); box-shadow:0 10px 28px rgba(0,0,0,0.06); }
-.rcard-stars { color:#7a8f5a; font-size:0.8rem; letter-spacing:2px; margin-bottom:1rem; }
-.rcard-q { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-style:italic; font-weight:400; color:var(--text); line-height:1.7; margin-bottom:1.3rem; }
-.rcard-meta { display:flex; align-items:center; gap:0.7rem; }
-.rcard-av { width:30px; height:30px; border-radius:50%; background:var(--sage-pale); display:flex; align-items:center; justify-content:center; font-size:0.6rem; font-weight:500; color:var(--sage-deep); flex-shrink:0; }
-.rcard-name { font-size:0.7rem; font-weight:500; color:var(--text); }
-.rcard-src { font-size:0.58rem; color:var(--text-soft); }
-
-/* ── VISIT ── */
-.visit-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.5rem; align-items:start; }
-.vcard { background:rgba(255,255,255,0.1); border-radius:12px; padding:2rem; border:1px solid rgba(255,255,255,0.12); }
-.vcard-title { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:500; color:var(--white); margin-bottom:1.5rem; padding-bottom:1rem; border-bottom:1px solid rgba(255,255,255,0.1); }
-.hr-row { display:flex; justify-content:space-between; padding:0.55rem 0; border-bottom:1px solid rgba(255,255,255,0.07); font-size:0.78rem; font-weight:300; color:rgba(255,255,255,0.48); }
-.hr-row:last-of-type { border-bottom:none; }
-.hr-row.today { color:var(--white); font-weight:400; }
-.vl { font-size:0.52rem; letter-spacing:0.3em; text-transform:uppercase; color:rgba(255,255,255,0.32); margin:1.1rem 0 0.3rem; }
-.vv { font-size:0.8rem; font-weight:300; line-height:1.7; color:rgba(255,255,255,0.52); }
-.vv a { color:rgba(255,255,255,0.82); text-decoration:none; }
-.svc-pills { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:1.3rem; }
-.svc-pill { background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.55); font-size:0.52rem; letter-spacing:0.16em; text-transform:uppercase; padding:0.28rem 0.8rem; border-radius:20px; border:1px solid rgba(255,255,255,0.1); }
-.map-card { background:var(--sage-pale); border-radius:12px; overflow:hidden; position:relative; aspect-ratio:1; display:flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,0.1); }
-.map-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(107,143,94,0.12) 1px,transparent 1px),linear-gradient(90deg,rgba(107,143,94,0.12) 1px,transparent 1px); background-size:22px 22px; }
-.map-pulse { width:76px; height:76px; border-radius:50%; border:1.5px dashed var(--sage-light); display:flex; align-items:center; justify-content:center; animation:pulse 2.5s ease-in-out infinite; }
-@keyframes pulse { 0%,100%{transform:scale(1);opacity:0.5} 50%{transform:scale(1.1);opacity:1} }
-.map-pin { width:42px; height:42px; border-radius:50%; background:var(--sage); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(107,143,94,0.4); }
-.map-dot { width:11px; height:11px; border-radius:50%; background:var(--white); }
-.map-addr { position:absolute; bottom:1rem; left:0.8rem; right:0.8rem; background:var(--white); border-radius:8px; padding:0.65rem 0.9rem; font-size:0.68rem; color:var(--text-mid); box-shadow:0 2px 8px rgba(0,0,0,0.08); border:1px solid var(--linen-deep); line-height:1.5; }
-.map-addr strong { color:var(--sage-deep); font-weight:500; display:block; margin-bottom:2px; }
-
-/* ── FOOTER ── */
-footer { background:var(--text); padding:5rem 5vw 2.5rem; }
-.footer-grid { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:3rem; padding-bottom:3rem; border-bottom:1px solid rgba(255,255,255,0.06); }
-.f-logo { width:64px; height:64px; border-radius:50%; object-fit:cover; margin-bottom:1rem; display:block; }
-.f-name { font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:600; color:var(--sage-light); letter-spacing:0.05em; margin-bottom:0.25rem; display:block; }
-.f-tag { font-size:0.48rem; letter-spacing:0.36em; text-transform:uppercase; color:rgba(255,255,255,0.18); margin-bottom:1.3rem; display:block; }
-.f-body { font-size:0.78rem; font-weight:300; line-height:1.8; color:rgba(255,255,255,0.26); max-width:26ch; }
-.f-col-title { font-size:0.52rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--sage-light); margin-bottom:1.3rem; font-weight:400; }
-.f-links { list-style:none; display:flex; flex-direction:column; gap:0.65rem; }
-.f-links li a { font-size:0.78rem; font-weight:300; color:rgba(255,255,255,0.26); text-decoration:none; transition:color 0.3s; }
-.f-links li a:hover { color:var(--sage-light); }
-.footer-bottom { max-width:1200px; margin:2rem auto 0; display:flex; justify-content:space-between; font-size:0.58rem; letter-spacing:0.1em; color:rgba(255,255,255,0.12); flex-wrap:wrap; gap:1rem; }
-
-/* ── REVEAL ── */
-.reveal { opacity:0; transform:translateY(18px); transition:opacity 0.85s ease, transform 0.85s ease; }
-.reveal.visible { opacity:1; transform:translateY(0); }
-.d1{transition-delay:0.12s} .d2{transition-delay:0.24s} .d3{transition-delay:0.36s}
-
-/* ── RESPONSIVE ── */
-@media(max-width:1024px) {
-  .about-grid, .two-col { grid-template-columns:1fr; }
-  .visit-grid { grid-template-columns:1fr 1fr; }
-  .reviews-grid { grid-template-columns:1fr; }
-  .footer-grid { grid-template-columns:1fr 1fr; }
+.label {
+  font-size: 0.58rem; font-weight: 400; letter-spacing: 0.4em;
+  text-transform: uppercase; color: var(--green);
+  display: flex; align-items: center; gap: 0.75rem;
+  margin-bottom: 1.2rem;
 }
-@media(max-width:680px) {
-  nav { display:none; }
-  .visit-grid { grid-template-columns:1fr; }
-  .strip-div { display:none; }
-  .footer-grid { grid-template-columns:1fr; }
+.label::before { content: ''; width: 20px; height: 1px; background: var(--green-l); flex-shrink: 0; }
+
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  font-weight: 500; line-height: 1.05;
+  color: var(--ink); margin-bottom: 1.5rem;
+}
+h2 em { font-style: italic; color: var(--green); }
+.body-text {
+  font-size: 1rem; font-weight: 300; line-height: 1.85;
+  color: var(--mid); max-width: 52ch;
+}
+
+/* ===================== ABOUT ===================== */
+.about { background: var(--white); }
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 6vw, 7rem); align-items: center;
+}
+.about-text .body-text { margin-bottom: 1.4rem; }
+.about-text .body-text strong { color: var(--ink); font-weight: 500; }
+.about-stats {
+  display: flex; gap: 2.5rem; margin-top: 2.5rem;
+  padding-top: 2.5rem; border-top: 1px solid var(--stone);
+}
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem; font-weight: 500; color: var(--green);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.58rem; font-weight: 400; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--muted); margin-top: 4px;
+}
+.about-image {
+  background: var(--green-p);
+  border-radius: 4px;
+  aspect-ratio: 4/5;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.about-image-inner {
+  width: 55%; height: auto; opacity: 0.35;
+}
+.about-image-tag {
+  position: absolute; bottom: 2rem; left: 2rem; right: 2rem;
+  background: var(--white); border-radius: 8px;
+  padding: 1rem 1.2rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.about-image-tag-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; font-weight: 500; color: var(--ink);
+}
+.about-image-tag-sub {
+  font-size: 0.6rem; font-weight: 300; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--muted); margin-top: 2px;
+}
+.about-image-tag-rating {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem; font-weight: 500; color: var(--green);
+}
+
+/* ===================== MENU ===================== */
+.menu-section { background: var(--cream); }
+.menu-header {
+  display: flex; justify-content: space-between;
+  align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1.5rem;
+}
+.menu-header p { font-size: 0.75rem; font-weight: 300; color: var(--muted); font-style: italic; }
+
+.tab-row {
+  display: flex; gap: 0; margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--stone); overflow-x: auto;
+  scrollbar-width: none;
+}
+.tab-row::-webkit-scrollbar { display: none; }
+.tab {
+  background: none; border: none; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.68rem; font-weight: 400; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--muted);
+  padding: 0.75rem 1.5rem; white-space: nowrap;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  transition: color 0.3s;
+}
+.tab:hover { color: var(--green); }
+.tab.active { color: var(--green-d); font-weight: 500; border-bottom-color: var(--green); }
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+.menu-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 4rem; }
+
+.menu-cat {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--ink);
+  background: var(--green-p); padding: 0.5rem 0.9rem;
+  border-radius: 4px; margin: 2rem 0 0.8rem;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.menu-cat:first-child { margin-top: 0; }
+.menu-cat-note {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.52rem; font-weight: 300; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--muted);
+}
+.menu-row {
+  display: flex; justify-content: space-between;
+  align-items: baseline; gap: 1rem;
+  padding: 0.7rem 0; border-bottom: 1px solid var(--stone);
+}
+.menu-row:last-child { border-bottom: none; }
+.menu-row-left { flex: 1; }
+.menu-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; font-weight: 500; color: var(--ink);
+}
+.menu-desc { font-size: 0.7rem; font-weight: 300; color: var(--muted); line-height: 1.5; margin-top: 2px; }
+.menu-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem; font-weight: 400; color: var(--green-d);
+  white-space: nowrap; flex-shrink: 0;
+}
+.badge {
+  display: inline-block; font-size: 0.45rem; letter-spacing: 0.15em;
+  text-transform: uppercase; background: var(--green-p); color: var(--green-d);
+  padding: 0.1rem 0.45rem; border-radius: 100px;
+  margin-left: 0.35rem; vertical-align: middle;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ===================== REVIEWS ===================== */
+.reviews { background: var(--sand); }
+.reviews-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 3rem; flex-wrap: wrap; gap: 2rem;
+}
+.rating-big {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4rem; font-weight: 500; color: var(--green); line-height: 1;
+}
+.rating-stars { color: var(--green-l); font-size: 0.85rem; letter-spacing: 3px; margin: 4px 0; }
+.rating-count { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+.reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.review-card {
+  background: var(--white); border-radius: 8px;
+  padding: 1.75rem; transition: transform 0.3s, box-shadow 0.3s;
+}
+.review-card:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.07); }
+.review-stars { color: var(--green-l); font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 1rem; }
+.review-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; font-style: italic; font-weight: 400;
+  color: var(--ink); line-height: 1.7; margin-bottom: 1.25rem;
+}
+.review-author { font-size: 0.68rem; font-weight: 400; color: var(--muted); letter-spacing: 0.05em; }
+
+/* ===================== VISIT ===================== */
+.visit { background: var(--green); }
+.visit h2 { color: var(--white); }
+.visit h2 em { color: rgba(255,255,255,0.5); }
+.visit .label { color: rgba(255,255,255,0.5); }
+.visit .label::before { background: rgba(255,255,255,0.3); }
+.visit-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+.visit-card {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px; padding: 2rem;
+}
+.visit-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; font-weight: 500; color: var(--white);
+  margin-bottom: 1.4rem; padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.hours-row {
+  display: flex; justify-content: space-between;
+  padding: 0.55rem 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  font-size: 0.82rem; font-weight: 300; color: rgba(255,255,255,0.5);
+}
+.hours-row:last-of-type { border-bottom: none; }
+.hours-row.today { color: var(--white); font-weight: 400; }
+.hours-row.today .hours-day::after { content: ' ·'; color: rgba(255,255,255,0.4); }
+.contact-label {
+  font-size: 0.52rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35); margin: 1.1rem 0 0.3rem;
+}
+.contact-val { font-size: 0.82rem; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.7; }
+.contact-val a { color: rgba(255,255,255,0.85); text-decoration: none; }
+.service-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.2rem; }
+.service-tag {
+  font-size: 0.52rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55); padding: 0.28rem 0.8rem; border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06);
+}
+/* Map card */
+.map-card {
+  border-radius: 8px; overflow: hidden; aspect-ratio: 1;
+  background: var(--green-p); position: relative;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.map-grid-lines {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(104,124,75,0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(104,124,75,0.15) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+.map-pin-wrap {
+  width: 72px; height: 72px; border-radius: 50%;
+  border: 1.5px dashed var(--green-l);
+  display: flex; align-items: center; justify-content: center;
+  animation: ping 2.5s ease-in-out infinite;
+}
+@keyframes ping { 0%,100%{opacity:0.5;transform:scale(1)} 50%{opacity:1;transform:scale(1.08)} }
+.map-pin-inner {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--green); display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 16px rgba(104,124,75,0.5);
+}
+.map-pin-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--white); }
+.map-address {
+  position: absolute; bottom: 1rem; left: 0.8rem; right: 0.8rem;
+  background: var(--white); border-radius: 6px; padding: 0.65rem 0.9rem;
+  font-size: 0.68rem; line-height: 1.5; color: var(--mid);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.map-address strong { display: block; color: var(--green-d); font-weight: 500; margin-bottom: 1px; }
+
+/* ===================== FOOTER ===================== */
+footer {
+  background: var(--ink); padding: 4rem 5vw 2rem;
+}
+.footer-grid {
+  max-width: 1160px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem; padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.footer-logo { height: 48px; width: auto; margin-bottom: 1rem; display: block; }
+.footer-brand-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; font-weight: 500; color: var(--green-l);
+  letter-spacing: 0.04em; display: block; margin-bottom: 0.3rem;
+}
+.footer-tagline {
+  font-size: 0.5rem; letter-spacing: 0.32em; text-transform: uppercase;
+  color: rgba(255,255,255,0.2); display: block; margin-bottom: 1.2rem;
+}
+.footer-desc { font-size: 0.8rem; font-weight: 300; color: rgba(255,255,255,0.28); line-height: 1.8; }
+.footer-col-title {
+  font-size: 0.52rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--green-l); margin-bottom: 1.2rem; font-weight: 400;
+}
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.footer-links a {
+  font-size: 0.8rem; font-weight: 300; color: rgba(255,255,255,0.28);
+  text-decoration: none; transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--green-l); }
+.footer-bottom {
+  max-width: 1160px; margin: 1.5rem auto 0;
+  display: flex; justify-content: space-between;
+  font-size: 0.6rem; color: rgba(255,255,255,0.15);
+  letter-spacing: 0.08em; flex-wrap: wrap; gap: 0.5rem;
+}
+
+/* ===================== REVEAL ===================== */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-image { order: -1; aspect-ratio: 3/2; }
+  .menu-cols { grid-template-columns: 1fr; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .visit-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .footer-grid { grid-template-columns: 1fr; }
+  .hero-actions { flex-direction: column; align-items: center; }
+  .about-stats { gap: 1.5rem; }
 }
 </style>
 </head>
 <body>
 
-<!-- LOADER -->
-<div class="loader" id="loader">
-  
-</div>
-
-<!-- HEADER -->
-<header id="header">
-  <a href="#" class="header-left">
-    <img src="Untitled design.png" alt="Green Nest Cafe" style="width:44px;height:44px;object-fit:contain;">
-    
-    <div class="header-brand-col">
-      <span class="header-brand-name">Green Nest Cafe</span>
-      <span class="header-brand-tag">Sip, Relax &amp; Reflect</span>
-    </div>
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <img src="Untitled design.png" alt="Green Nest Cafe">
+    <span class="nav-logo-text">Green Nest Cafe</span>
   </a>
-  <nav>
+  <div class="nav-links">
     <a href="#about">About</a>
     <a href="#menu">Menu</a>
     <a href="#reviews">Reviews</a>
-    <a href="#visit" class="nav-visit">Visit Us</a>
-  </nav>
-</header>
+    <a href="#visit" class="nav-cta">Visit Us</a>
+  </div>
+  <button class="nav-burger" id="burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="menuClose">✕</button>
+  <a href="#about" class="menu-link">About</a>
+  <a href="#menu" class="menu-link">Menu</a>
+  <a href="#reviews" class="menu-link">Reviews</a>
+  <a href="#visit" class="menu-link">Visit Us</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
-  
-  <div class="hero-content">
-    <img src="Untitled design.png" alt="Green Nest Cafe" style="width:clamp(140px,18vw,200px);height:auto;object-fit:contain;display:block;margin:0 auto 2.5rem;">
-    
-    <h1 class="hero-h1">GREEN<br>NEST</h1>
-    <div class="hero-cafe">Cafe</div>
-    <div class="hero-rule"></div>
-    <div class="hero-sub">Bedford, Texas &nbsp;·&nbsp; Sip, Relax &amp; Reflect</div>
-    <p class="hero-desc">Locally roasted coffee, Korean-inspired dishes, and scratch-made food — served with genuine warmth in Bedford's coziest corner.</p>
-    <div class="hero-btns">
-      <a href="#menu" class="btn-solid">Explore the Menu</a>
-      <a href="#visit" class="btn-outline">Plan Your Visit</a>
-    </div>
+  <img class="hero-logo" src="Untitled design.png" alt="Green Nest Cafe">
+  <h1 class="hero-title">GREEN<br>NEST</h1>
+  <p class="hero-sub">Cafe</p>
+  <p class="hero-tagline">Bedford, Texas &nbsp;·&nbsp; Sip, Relax &amp; Reflect</p>
+  <div class="hero-actions">
+    <a href="#menu" class="btn-primary">Explore the Menu</a>
+    <a href="#visit" class="btn-secondary">Find Us</a>
   </div>
-  <div class="scroll-hint"><div class="scroll-hint-line"></div><span>Scroll</span></div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee">
-  <div class="marquee-track">
-    <span class="marquee-item"><span class="mdot">✦</span> Honey Lavender Latte</span>
-    <span class="marquee-item"><span class="mdot">✦</span> Tiramisu Cold Brew</span>
-    <span class="marquee-item"><span class="mdot">✦</span> Bulgogi Rice Bowl</span>
-    <span class="marquee-item"><span class="mdot">✦</span> Ube Latte</span>
-    <span class="marquee-item"><span class="mdot">✦</span> Avocado Toast</span>
-    <span class="marquee-item"><span class="mdot">✦</span> Mango Coconut Hojicha</span>
-    <span class="marquee-item"><span class="mdot">✦</span> Loaded Lox</span>
-    <span class="marquee-item"><span class="mdot">✦</span> Matcha Cloud Iced Tea</span>
-    <span class="marquee-item"><span class="mdot">✦</span> Strawberry Matcha Latte</span>
-    <span class="marquee-item"><span class="mdot">✦</span> Chicken Pesto Sandwich</span>
-    <span class="marquee-item"><span class="mdot">✦</span> Honey Lavender Latte</span>
-    <span class="marquee-item"><span class="mdot">✦</span> Tiramisu Cold Brew</span>
-    <span class="marquee-item"><span class="mdot">✦</span> Bulgogi Rice Bowl</span>
-    <span class="marquee-item"><span class="mdot">✦</span> Ube Latte</span>
-    <span class="marquee-item"><span class="mdot">✦</span> Avocado Toast</span>
-    <span class="marquee-item"><span class="mdot">✦</span> Mango Coconut Hojicha</span>
-    <span class="marquee-item"><span class="mdot">✦</span> Loaded Lox</span>
-    <span class="marquee-item"><span class="mdot">✦</span> Matcha Cloud Iced Tea</span>
-    <span class="marquee-item"><span class="mdot">✦</span> Strawberry Matcha Latte</span>
-    <span class="marquee-item"><span class="mdot">✦</span> Chicken Pesto Sandwich</span>
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item"><span class="ticker-dot">✦</span> Honey Lavender Latte</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> Tiramisu Cold Brew</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> Bulgogi Rice Bowl</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> Ube Latte</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> Avocado Toast</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> Mango Coconut Hojicha</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> Loaded Lox</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> Matcha Cloud Iced Tea</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> Strawberry Matcha Latte</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> Chicken Pesto Sandwich</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> Honey Lavender Latte</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> Tiramisu Cold Brew</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> Bulgogi Rice Bowl</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> Ube Latte</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> Avocado Toast</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> Mango Coconut Hojicha</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> Loaded Lox</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> Matcha Cloud Iced Tea</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> Strawberry Matcha Latte</span>
+    <span class="ticker-item"><span class="ticker-dot">✦</span> Chicken Pesto Sandwich</span>
   </div>
 </div>
 
 <!-- ABOUT -->
-<section class="section section-white" id="about">
-  <div class="inner">
+<section class="about" id="about">
+  <div class="container">
     <div class="about-grid">
-      <div>
-        <div class="eyebrow reveal"><span class="ey-line"></span>Our Story</div>
-        <h2 class="h2 reveal d1">A neighborhood cafe<br>built to make you <em>feel at home</em></h2>
-        <p class="about-p reveal d2">Green Nest Cafe is Bedford's beloved gathering spot where <strong>genuine hospitality meets exceptional coffee</strong>. With a 4.9-star rating from hundreds of loyal customers, we've created a space that truly feels like home.</p>
-        <p class="about-p reveal d2">From our locally roasted espresso drinks to Korean-inspired YUBU dishes and scratch-made sandwiches — every detail is crafted with care. Step in, slow down, and stay a while.</p>
+      <div class="about-text">
+        <div class="label reveal">Our Story</div>
+        <h2 class="reveal delay-1">A neighborhood cafe built<br>to make you <em>feel at home</em></h2>
+        <p class="body-text reveal delay-2">Green Nest Cafe is Bedford's beloved gathering spot where <strong>genuine hospitality meets exceptional coffee</strong>. With a 4.9-star rating from hundreds of loyal customers, we've built a space that truly feels like home.</p>
+        <p class="body-text reveal delay-2">From locally roasted espresso to Korean-inspired YUBU dishes and scratch-made sandwiches — every detail is crafted with intention. Step in, slow down, stay a while.</p>
+        <div class="about-stats reveal delay-3">
+          <div>
+            <div class="stat-num">4.9★</div>
+            <div class="stat-label">Google Rating</div>
+          </div>
+          <div>
+            <div class="stat-num">7</div>
+            <div class="stat-label">Days a Week</div>
+          </div>
+          <div>
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Scratch-Made</div>
+          </div>
+        </div>
       </div>
-      <div class="about-visual reveal d2">
-        
-          <div class="astat"><div class="astat-n">7</div><div class="astat-l">Days Open</div></div>
-          <div class="astat"><div class="astat-n">100%</div><div class="astat-l">Scratch-Made</div></div>
+      <div class="about-image reveal delay-2">
+        <img class="about-image-inner" src="Untitled design.png" alt="">
+        <div class="about-image-tag">
+          <div>
+            <div class="about-image-tag-name">Green Nest Cafe</div>
+            <div class="about-image-tag-sub">Bedford, Texas</div>
+          </div>
+          <div class="about-image-tag-rating">4.9★</div>
         </div>
       </div>
     </div>
@@ -405,170 +622,190 @@ footer { background:var(--text); padding:5rem 5vw 2.5rem; }
 </section>
 
 <!-- MENU -->
-<section class="section section-linen" id="menu">
-  <div class="inner">
-    <div class="eyebrow reveal"><span class="ey-line"></span>Our Menu</div>
-    <h2 class="h2 reveal d1">Crafted with <em>intention</em>, served with warmth</h2>
-    <p style="font-size:0.78rem;font-weight:300;color:var(--text-soft);font-style:italic;margin-bottom:2.5rem;">Prices subject to change · Please inform us of any allergies · Gluten free bread +$1.75</p>
-    <div class="tab-bar">
-      <button class="tab-btn active" data-tab="drinks">Drinks</button>
-      <button class="tab-btn" data-tab="food">Food</button>
-      <button class="tab-btn" data-tab="dessert">Dessert &amp; Pastries</button>
+<section class="menu-section" id="menu">
+  <div class="container">
+    <div class="menu-header">
+      <div>
+        <div class="label reveal">What We Serve</div>
+        <h2 class="reveal delay-1">Our Menu</h2>
+      </div>
+      <p class="reveal delay-2">Prices subject to change · Please inform us of allergies<br>Gluten free bread +$1.75</p>
     </div>
-    <div class="tab-panel active" id="tab-drinks">
-      <div class="two-col">
+
+    <div class="tab-row">
+      <button class="tab active" data-tab="drinks">Drinks</button>
+      <button class="tab" data-tab="food">Food</button>
+      <button class="tab" data-tab="dessert">Dessert &amp; Pastries</button>
+    </div>
+
+    <!-- DRINKS -->
+    <div class="tab-content active" id="tab-drinks">
+      <div class="menu-cols">
         <div>
-          <div class="mshead">Espresso <span class="msnote">8oz hot / 12·16·20oz iced</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Double Shots</span></div><span class="mprice">$3</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Macchiato</span></div><span class="mprice">$3.25</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Cortado</span></div><span class="mprice">$3.75</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Flat White</span></div><span class="mprice">$4</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Americano</span></div><span class="mprice">$3.5 / 4 / 5.75</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Latte</span></div><span class="mprice">$4.25 / 4.5 / 4.75 / 5.25</span></div>
-          <div class="mshead">Coffee</div>
-          <div class="mrow"><div class="mleft"><span class="mname">Drip Coffee</span></div><span class="mprice">$3 / 3.5</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Pour Over (12oz)</span></div><span class="mprice">$4.75</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Cold Brew</span></div><span class="mprice">$5.25 / 5.75 / 6.25</span></div>
-          <div class="mshead">Other Latte <span class="msnote">12·16·20oz iced only</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Matcha / Hojicha</span></div><span class="mprice">$4.75 / 5.25 / 5.75</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Ube</span></div><span class="mprice">$4.75 / 5.25 / 5.75</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Chai</span></div><span class="mprice">$5.0 / 5.5 / 6.0</span></div>
-          <div class="mshead">Frappe <span class="msnote">16oz / 20oz</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Espresso / Matcha / Hojicha</span></div><span class="mprice">$6.25 / 6.75</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Chai / Ube / Vanilla / Mocha</span></div><span class="mprice">$6.25 / 6.75</span></div>
-          <div class="mshead">Loose Leaf Tea <span class="msnote">*Decaf available</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Hot</span><span class="mdesc">Earl Grey · Rooibos* · Chamomile* · Green · Oolong · White</span></div><span class="mprice">$4</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Iced</span><span class="mdesc">Black Mango · Hibiscus Berry · Green</span></div><span class="mprice">$4</span></div>
+          <div class="menu-cat">Espresso <span class="menu-cat-note">8oz hot / 12·16·20oz iced</span></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Double Shots</div></div><div class="menu-price">$3</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Macchiato</div></div><div class="menu-price">$3.25</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Cortado</div></div><div class="menu-price">$3.75</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Flat White</div></div><div class="menu-price">$4</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Americano</div></div><div class="menu-price">$3.5 / 4 / 5.75</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Latte</div></div><div class="menu-price">$4.25 / 4.5 / 4.75 / 5.25</div></div>
+          <div class="menu-cat">Coffee</div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Drip Coffee</div></div><div class="menu-price">$3 / 3.5</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Pour Over (12oz)</div></div><div class="menu-price">$4.75</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Cold Brew</div></div><div class="menu-price">$5.25 / 5.75 / 6.25</div></div>
+          <div class="menu-cat">Other Latte <span class="menu-cat-note">12·16·20oz iced only</span></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Matcha / Hojicha</div></div><div class="menu-price">$4.75 / 5.25 / 5.75</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Ube</div></div><div class="menu-price">$4.75 / 5.25 / 5.75</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Chai</div></div><div class="menu-price">$5.0 / 5.5 / 6.0</div></div>
+          <div class="menu-cat">Frappe <span class="menu-cat-note">16oz / 20oz</span></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Espresso / Matcha / Hojicha</div></div><div class="menu-price">$6.25 / 6.75</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Chai / Ube / Vanilla / Mocha</div></div><div class="menu-price">$6.25 / 6.75</div></div>
+          <div class="menu-cat">Loose Leaf Tea <span class="menu-cat-note">*Decaf avail. · $4</span></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Hot</div><div class="menu-desc">Earl Grey · Rooibos* · Chamomile* · Green · Oolong · White</div></div><div class="menu-price">$4</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Iced</div><div class="menu-desc">Black Mango · Hibiscus Berry · Green</div></div><div class="menu-price">$4</div></div>
         </div>
         <div>
-          <div class="mshead">Signature Drinks</div>
-          <div class="mrow"><div class="mleft"><span class="mname">Honey Lavender Latte</span><span class="mdesc">Honey, lavender syrup, espresso, milk</span></div><span class="mprice">$5.25 / 5.75 / 6.25</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Strawberry Matcha Latte <span class="mtag">Iced</span></span><span class="mdesc">Strawberry puree, matcha, milk</span></div><span class="mprice">$5.25 / 5.75 / 6.25</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Mango Coconut Hojicha <span class="mtag">Iced</span></span><span class="mdesc">Mango puree, coconut syrup, hojicha, milk</span></div><span class="mprice">$5.25 / 5.75 / 6.25</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Dalgona Latte <span class="mtag">Iced</span></span><span class="mdesc">Whipped coffee cream, caramel toffee with your choice of milk</span></div><span class="mprice">$5.25 / 5.75 / 6.25</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Citron Espresso Tonic <span class="mtag">Iced</span></span><span class="mdesc">Tonic water, cardamone, squeezed lemon with espresso</span></div><span class="mprice">$5.75 · 16oz</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Tiramisu Cold Brew <span class="mtag">Iced</span></span><span class="mdesc">Tiramisu syrup, cold foam, cold brew</span></div><span class="mprice">$5.75 / 6.25 / 6.75</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Honey Lemon Ginger Tea</span><span class="mdesc">Homemade honey lemon ginger syrup</span></div><span class="mprice">$5.95 · 16oz</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Matcha Cloud Iced Tea <span class="mtag">Iced</span></span><span class="mdesc">Matcha cold foam with Earl Grey tea latte</span></div><span class="mprice">$5.25 / 5.75 / 6.25</span></div>
+          <div class="menu-cat">Signature Drinks</div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Honey Lavender Latte</div><div class="menu-desc">Honey, lavender syrup, espresso, milk</div></div><div class="menu-price">$5.25 / 5.75 / 6.25</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Strawberry Matcha Latte <span class="badge">Iced</span></div><div class="menu-desc">Strawberry puree, matcha, milk</div></div><div class="menu-price">$5.25 / 5.75 / 6.25</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Mango Coconut Hojicha <span class="badge">Iced</span></div><div class="menu-desc">Mango puree, coconut syrup, hojicha, milk</div></div><div class="menu-price">$5.25 / 5.75 / 6.25</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Dalgona Latte <span class="badge">Iced</span></div><div class="menu-desc">Whipped coffee cream, caramel toffee, your choice of milk</div></div><div class="menu-price">$5.25 / 5.75 / 6.25</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Citron Espresso Tonic <span class="badge">Iced</span></div><div class="menu-desc">Tonic water, cardamone, squeezed lemon, espresso</div></div><div class="menu-price">$5.75 · 16oz</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Tiramisu Cold Brew <span class="badge">Iced</span></div><div class="menu-desc">Tiramisu syrup, cold foam, cold brew</div></div><div class="menu-price">$5.75 / 6.25 / 6.75</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Honey Lemon Ginger Tea</div><div class="menu-desc">Homemade honey lemon ginger syrup</div></div><div class="menu-price">$5.95 · 16oz</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Matcha Cloud Iced Tea <span class="badge">Iced</span></div><div class="menu-desc">Matcha cold foam with Earl Grey tea latte</div></div><div class="menu-price">$5.25 / 5.75 / 6.25</div></div>
         </div>
       </div>
     </div>
-    <div class="tab-panel" id="tab-food">
-      <div class="two-col">
+
+    <!-- FOOD -->
+    <div class="tab-content" id="tab-food">
+      <div class="menu-cols">
         <div>
-          <div class="mshead">Breakfast <span class="msnote">Until 12pm daily</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Egg &amp; Cheese Sandwich</span><span class="mdesc">Egg, cheddar cheese on toasted sourdough</span></div><span class="mprice">$6.25</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Avocado Toast</span><span class="mdesc">Avocado, chili pepper, salt flake on toasted sourdough</span></div><span class="mprice">$7.25</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Spicy Hummus &amp; Egg &amp; Cheese</span><span class="mdesc">Egg, Swiss cheese on toasted sourdough</span></div><span class="mprice">$7.25</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Loaded Lox</span><span class="mdesc">Smoked salmon, cream cheese, dill, capers, red onion, tomato, chili pepper, salt flake, olive oil on sourdough</span></div><span class="mprice">$12.95</span></div>
-          <div class="mshead">Hot Sandwiches <span class="msnote">With chips or mixed green</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Chicken Pesto</span><span class="mdesc">Pesto paste, sliced tomato, fresh basil, fresh mozzarella, chicken on sourdough</span></div><span class="mprice">$10.95</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Cubano</span><span class="mdesc">Pulled pork, roasted ham, homemade pickles, yellow mustard, mayo on ciabatta</span></div><span class="mprice">$11.95</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Italian</span><span class="mdesc">Salami, roasted ham, mild roasted red pepper, banana pickles on ciabatta</span></div><span class="mprice">$11.95</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Tunamelt</span><span class="mdesc">Tuna salad, sliced tomato, homemade pickles, cheddar cheese on sourdough</span></div><span class="mprice">$10.95</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Veggie Hummus</span><span class="mdesc">Red pepper, red onion, mushroom, zucchini, hummus, fresh basil, mozzarella on sourdough</span></div><span class="mprice">$10.95</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Spicy Jelly Grilled Cheese</span><span class="mdesc">Spicy jelly, roasted ham, homemade pickles, cheddar &amp; Swiss cheese on sourdough</span></div><span class="mprice">$10.95</span></div>
+          <div class="menu-cat">Breakfast <span class="menu-cat-note">Until 12pm daily</span></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Egg &amp; Cheese Sandwich</div><div class="menu-desc">Egg, cheddar cheese on toasted sourdough</div></div><div class="menu-price">$6.25</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Avocado Toast</div><div class="menu-desc">Avocado, chili pepper, salt flake on toasted sourdough</div></div><div class="menu-price">$7.25</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Spicy Hummus &amp; Egg &amp; Cheese</div><div class="menu-desc">Egg, Swiss cheese on toasted sourdough</div></div><div class="menu-price">$7.25</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Loaded Lox</div><div class="menu-desc">Smoked salmon, cream cheese, dill, capers, red onion, tomato, chili, salt flake, olive oil on sourdough</div></div><div class="menu-price">$12.95</div></div>
+          <div class="menu-cat">Hot Sandwiches <span class="menu-cat-note">With chips or mixed green</span></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Chicken Pesto</div><div class="menu-desc">Pesto paste, tomato, basil, fresh mozzarella, chicken on sourdough</div></div><div class="menu-price">$10.95</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Cubano</div><div class="menu-desc">Pulled pork, roasted ham, pickles, yellow mustard, mayo on ciabatta</div></div><div class="menu-price">$11.95</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Italian</div><div class="menu-desc">Salami, roasted ham, roasted red pepper, banana pickles on ciabatta</div></div><div class="menu-price">$11.95</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Tunamelt</div><div class="menu-desc">Tuna salad, tomato, pickles, cheddar cheese on sourdough</div></div><div class="menu-price">$10.95</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Veggie Hummus</div><div class="menu-desc">Red pepper, red onion, mushroom, zucchini, hummus, basil, mozzarella on sourdough</div></div><div class="menu-price">$10.95</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Spicy Jelly Grilled Cheese</div><div class="menu-desc">Spicy jelly, roasted ham, pickles, cheddar &amp; Swiss on sourdough</div></div><div class="menu-price">$10.95</div></div>
         </div>
         <div>
-          <div class="mshead">Rice Bowls</div>
-          <div class="mrow"><div class="mleft"><span class="mname">Bulgogi Rice Bowl</span><span class="mdesc">Mixed green, cherry tomato, sliced red onion, over easy egg, mayo &amp; BBQ soy garlic sauce</span></div><span class="mprice">$12.95</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Spicy Pork</span><span class="mdesc">Mixed green, cherry tomato, sliced red onion, over easy egg, mayo &amp; comeback sauce</span></div><span class="mprice">$12.95</span></div>
-          <div class="mshead">Salad <span class="msnote">Add chicken +$2.85</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Greek Salad</span><span class="mdesc">Mixed green, cherry tomato, sliced red onion, over easy egg, mayo &amp; BBQ soy garlic sauce</span></div><span class="mprice">$9.75</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Cobb Salad</span><span class="mdesc">Mixed green, cherry tomato, sliced red onion, over easy egg, mayo &amp; comeback sauce</span></div><span class="mprice">$10.25</span></div>
-          <div class="mrow"><div class="mleft"><span class="mname">Garden Salad</span><span class="mdesc">Mixed greens, red onion, cucumber, shredded cheese, crouton — balsamic / red wine / lime ranch / Italian</span></div><span class="mprice">$9.75</span></div>
-          <div style="margin-top:2rem;background:var(--sage-pale);border-radius:8px;padding:1.1rem;font-size:0.75rem;font-weight:300;color:var(--text-soft);line-height:1.8;">
-            <strong style="color:var(--sage-deep);font-weight:500;font-family:'Cormorant Garamond',serif;font-size:0.95rem;display:block;margin-bottom:0.5rem;">Add-Ons</strong>
-            Feta Cheese +$0.75 · Cherry Tomato +$1 · Bacon +$1.50 · Smoked Ham +$1.50 · Two Cracked Eggs +$2.25 · Harissa Sauce +$0.75 · Avocado +$1.75 · Sliced Tomato +$0.75
-          </div>
+          <div class="menu-cat">Rice Bowls</div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Bulgogi Rice Bowl</div><div class="menu-desc">Mixed green, cherry tomato, red onion, over easy egg, mayo &amp; BBQ soy garlic sauce</div></div><div class="menu-price">$12.95</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Spicy Pork</div><div class="menu-desc">Mixed green, cherry tomato, red onion, over easy egg, mayo &amp; comeback sauce</div></div><div class="menu-price">$12.95</div></div>
+          <div class="menu-cat">Salad <span class="menu-cat-note">Add chicken +$2.85</span></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Greek Salad</div><div class="menu-desc">Mixed green, cherry tomato, red onion, over easy egg, mayo &amp; BBQ soy garlic sauce</div></div><div class="menu-price">$9.75</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Cobb Salad</div><div class="menu-desc">Mixed green, cherry tomato, red onion, over easy egg, mayo &amp; comeback sauce</div></div><div class="menu-price">$10.25</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Garden Salad</div><div class="menu-desc">Mixed greens, red onion, cucumber, shredded cheese, crouton. Dressing: balsamic / red wine / lime ranch / Italian</div></div><div class="menu-price">$9.75</div></div>
+          <div class="menu-cat">Add-Ons</div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Feta Cheese</div></div><div class="menu-price">+$0.75</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Cherry Tomato</div></div><div class="menu-price">+$1</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Bacon</div></div><div class="menu-price">+$1.50</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Smoked Ham</div></div><div class="menu-price">+$1.50</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Two Cracked Eggs</div></div><div class="menu-price">+$2.25</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Harissa Sauce</div></div><div class="menu-price">+$0.75</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Avocado</div></div><div class="menu-price">+$1.75</div></div>
+          <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Sliced Tomato</div></div><div class="menu-price">+$0.75</div></div>
         </div>
       </div>
     </div>
-    <div class="tab-panel" id="tab-dessert">
-      <div style="max-width:500px">
-        <div class="mshead">Dessert &amp; Pastries</div>
-        <div class="mrow"><div class="mleft"><span class="mname">Tiramisu</span><span class="mdesc">Espresso or Matcha</span></div><span class="mprice">$6.25</span></div>
-        <div class="mrow"><div class="mleft"><span class="mname">Affogato</span><span class="mdesc">Espresso / Matcha / Hojicha / Ube</span></div><span class="mprice">$5.50</span></div>
-        <div class="mrow"><div class="mleft"><span class="mname">Cookies</span></div><span class="mprice">$2.25</span></div>
-        <div class="mrow"><div class="mleft"><span class="mname">Scone</span></div><span class="mprice">$3.75</span></div>
+
+    <!-- DESSERT -->
+    <div class="tab-content" id="tab-dessert">
+      <div style="max-width: 480px;">
+        <div class="menu-cat">Dessert &amp; Pastries</div>
+        <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Tiramisu</div><div class="menu-desc">Espresso or Matcha</div></div><div class="menu-price">$6.25</div></div>
+        <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Affogato</div><div class="menu-desc">Espresso / Matcha / Hojicha / Ube</div></div><div class="menu-price">$5.50</div></div>
+        <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Cookies</div></div><div class="menu-price">$2.25</div></div>
+        <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Scone</div></div><div class="menu-price">$3.75</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- STRIP -->
-<div class="strip">
-  <div class="strip-item reveal"><div class="strip-num">4.9★</div><div class="strip-lbl">Google Rating</div></div>
-  <div class="strip-div"></div>
-  <div class="strip-item reveal d1"><div class="strip-num">7</div><div class="strip-lbl">Days Open</div></div>
-  <div class="strip-div"></div>
-  <div class="strip-item reveal d2"><div class="strip-num">Local</div><div class="strip-lbl">Roasters Only</div></div>
-  <div class="strip-div"></div>
-  <div class="strip-item reveal d3"><div class="strip-num">100%</div><div class="strip-lbl">Scratch Kitchen</div></div>
-</div>
-
 <!-- REVIEWS -->
-<section class="section section-white" id="reviews">
-  <div class="inner">
-    <div class="reviews-top">
+<section class="reviews" id="reviews">
+  <div class="container">
+    <div class="reviews-header">
       <div>
-        <div class="eyebrow reveal"><span class="ey-line"></span>Community Reviews</div>
-        <h2 class="h2 reveal d1">What Bedford<br><em>is saying</em></h2>
+        <div class="label reveal">Community</div>
+        <h2 class="reveal delay-1">What people<br><em>are saying</em></h2>
       </div>
-      <div style="text-align:right" class="reveal d2">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:3.2rem;font-weight:500;color:var(--sage);line-height:1">4.9</div>
-        <div style="color:#7a8f5a;font-size:0.85rem;letter-spacing:2px;margin-bottom:3px">★★★★★</div>
-        <div style="font-size:0.56rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-soft)">Hundreds of Reviews</div>
+      <div class="reveal delay-2" style="text-align:right">
+        <div class="rating-big">4.9</div>
+        <div class="rating-stars">★★★★★</div>
+        <div class="rating-count">Hundreds of reviews</div>
       </div>
     </div>
     <div class="reviews-grid">
-      <div class="rcard reveal">
-        <div class="rcard-stars">★★★★★</div>
-        <p class="rcard-q">"The coffee was absolutely exquisite — rich, smooth, and perfectly balanced. The avocado toast was just as impressive. You can really tell they care about quality."</p>
-        <div class="rcard-meta"><div class="rcard-av">JR</div><div><div class="rcard-name">Jamie R.</div><div class="rcard-src">Google Review · Verified</div></div></div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"The coffee was absolutely exquisite — rich, smooth, and perfectly balanced. The avocado toast was just as impressive. You can really tell they care about quality."</p>
+        <div class="review-author">Jamie R. · Google Review</div>
       </div>
-      <div class="rcard reveal d1">
-        <div class="rcard-stars">★★★★★</div>
-        <p class="rcard-q">"I tried their Ube Latte with Korean YUBU rice — seriously, such a good choice. The staff was super friendly and the atmosphere is so warm. I keep coming back."</p>
-        <div class="rcard-meta"><div class="rcard-av" style="background:#F4EDE5;color:var(--wood)">ML</div><div><div class="rcard-name">Mia L.</div><div class="rcard-src">Google Review · Verified</div></div></div>
+      <div class="review-card reveal delay-1">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Tried their Ube Latte with Korean YUBU rice — seriously such a good choice. Staff was super friendly and the atmosphere is so warm. I keep coming back."</p>
+        <div class="review-author">Mia L. · Google Review</div>
       </div>
-      <div class="rcard reveal d2">
-        <div class="rcard-stars">★★★★★</div>
-        <p class="rcard-q">"An absolute gem — a refreshingly cozy ambiance that's both cute and calming. Fresh, flavorful options that keep surprising you. A true neighborhood treasure."</p>
-        <div class="rcard-meta"><div class="rcard-av" style="background:var(--linen-deep);color:var(--text-mid)">SK</div><div><div class="rcard-name">Sara K.</div><div class="rcard-src">Google Review · Verified</div></div></div>
+      <div class="review-card reveal delay-2">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"An absolute gem — refreshingly cozy ambiance that's both cute and calming. Fresh, flavorful options that keep surprising you. A true neighborhood treasure."</p>
+        <div class="review-author">Sara K. · Google Review</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- VISIT -->
-<section class="section section-sage" id="visit">
-  <div class="inner">
-    <div class="eyebrow reveal" style="color:rgba(255,255,255,0.42)"><span style="width:18px;height:1px;background:rgba(255,255,255,0.22);display:inline-block;margin-right:0.75rem"></span>Plan Your Visit</div>
-    <h2 class="h2 h2-light reveal d1">Come find<br>your <em>nest</em></h2>
-    <div class="visit-grid" style="margin-top:3rem">
-      <div class="vcard reveal">
-        <div class="vcard-title">Opening Hours</div>
-        <div class="hr-row"><span class="hr-day">Monday</span><span>7:30 AM – 5:00 PM</span></div>
-        <div class="hr-row"><span class="hr-day">Tuesday</span><span>7:30 AM – 5:00 PM</span></div>
-        <div class="hr-row"><span class="hr-day">Wednesday</span><span>7:30 AM – 5:00 PM</span></div>
-        <div class="hr-row"><span class="hr-day">Thursday</span><span>7:30 AM – 5:00 PM</span></div>
-        <div class="hr-row"><span class="hr-day">Friday</span><span>7:30 AM – 5:00 PM</span></div>
-        <div class="hr-row"><span class="hr-day">Saturday</span><span>7:30 AM – 6:00 PM</span></div>
-        <div class="hr-row"><span class="hr-day">Sunday</span><span>8:00 AM – 5:00 PM</span></div>
-        <div class="svc-pills"><span class="svc-pill">Dine-in</span><span class="svc-pill">Takeout</span><span class="svc-pill">In-store Pickup</span></div>
+<section class="visit" id="visit">
+  <div class="container">
+    <div class="label reveal">Come See Us</div>
+    <h2 class="reveal delay-1">Plan your <em>visit</em></h2>
+    <div class="visit-grid">
+      <div class="visit-card reveal">
+        <div class="visit-card-title">Hours</div>
+        <div class="hours-row"><span class="hours-day">Monday</span><span>7:30 AM – 5:00 PM</span></div>
+        <div class="hours-row"><span class="hours-day">Tuesday</span><span>7:30 AM – 5:00 PM</span></div>
+        <div class="hours-row"><span class="hours-day">Wednesday</span><span>7:30 AM – 5:00 PM</span></div>
+        <div class="hours-row"><span class="hours-day">Thursday</span><span>7:30 AM – 5:00 PM</span></div>
+        <div class="hours-row"><span class="hours-day">Friday</span><span>7:30 AM – 5:00 PM</span></div>
+        <div class="hours-row"><span class="hours-day">Saturday</span><span>7:30 AM – 6:00 PM</span></div>
+        <div class="hours-row"><span class="hours-day">Sunday</span><span>8:00 AM – 5:00 PM</span></div>
+        <div class="service-tags">
+          <span class="service-tag">Dine-in</span>
+          <span class="service-tag">Takeout</span>
+          <span class="service-tag">In-store Pickup</span>
+        </div>
       </div>
-      <div class="vcard reveal d1">
-        <div class="vcard-title">Contact &amp; Socials</div>
-        <div class="vl">Address</div><div class="vv">3708 Cheek Sparger Rd #110<br>Bedford, TX, United States</div>
-        <div class="vl">Phone</div><div class="vv"><a href="tel:6825034019">(682) 503-4019</a></div>
-        <div class="vl">Email</div><div class="vv"><a href="mailto:atgreennestcafe@gmail.com">atgreennestcafe@gmail.com</a></div>
-        <div class="vl">Instagram</div><div class="vv"><a href="#">@greennestcafe</a></div>
+      <div class="visit-card reveal delay-1">
+        <div class="visit-card-title">Contact</div>
+        <div class="contact-label">Address</div>
+        <div class="contact-val">3708 Cheek Sparger Rd #110<br>Bedford, TX</div>
+        <div class="contact-label">Phone</div>
+        <div class="contact-val"><a href="tel:6825034019">(682) 503-4019</a></div>
+        <div class="contact-label">Email</div>
+        <div class="contact-val"><a href="mailto:atgreennestcafe@gmail.com">atgreennestcafe@gmail.com</a></div>
+        <div class="contact-label">Instagram</div>
+        <div class="contact-val"><a href="#">@greennestcafe</a></div>
       </div>
-      <div class="map-card reveal d2">
-        <div class="map-grid"></div>
-        <div class="map-pulse"><div class="map-pin"><div class="map-dot"></div></div></div>
-        <div class="map-addr"><strong>Green Nest Cafe</strong>3708 Cheek Sparger Rd #110, Bedford, TX</div>
+      <div class="map-card reveal delay-2">
+        <div class="map-grid-lines"></div>
+        <div class="map-pin-wrap">
+          <div class="map-pin-inner">
+            <div class="map-pin-dot"></div>
+          </div>
+        </div>
+        <div class="map-address">
+          <strong>Green Nest Cafe</strong>
+          3708 Cheek Sparger Rd #110, Bedford, TX
+        </div>
       </div>
     </div>
   </div>
@@ -578,50 +815,82 @@ footer { background:var(--text); padding:5rem 5vw 2.5rem; }
 <footer>
   <div class="footer-grid">
     <div>
-      
-      <img src="Untitled design.png" alt="Green Nest Cafe" style="width:64px;height:auto;object-fit:contain;display:block;margin-bottom:1rem;">
-      <span class="f-name">Green Nest Cafe</span>
-      <span class="f-tag">Sip, Relax &amp; Reflect · Bedford, Texas</span>
-      <p class="f-body">A cozy, light-filled neighborhood cafe where every cup is made with care and every guest feels at home.</p>
+      <img class="footer-logo" src="Untitled design.png" alt="Green Nest Cafe">
+      <span class="footer-brand-name">Green Nest Cafe</span>
+      <span class="footer-tagline">Sip, Relax &amp; Reflect · Bedford, Texas</span>
+      <p class="footer-desc">A warm, cozy neighborhood cafe where every cup is made with care and every guest feels at home.</p>
     </div>
     <div>
-      <div class="f-col-title">Navigate</div>
-      <ul class="f-links"><li><a href="#about">About</a></li><li><a href="#menu">Menu</a></li><li><a href="#reviews">Reviews</a></li><li><a href="#visit">Visit Us</a></li></ul>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#visit">Visit Us</a></li>
+      </ul>
     </div>
     <div>
-      <div class="f-col-title">Hours</div>
-      <ul class="f-links"><li><a href="#">Mon–Fri: 7:30–5:00</a></li><li><a href="#">Saturday: 7:30–6:00</a></li><li><a href="#">Sunday: 8:00–5:00</a></li></ul>
+      <div class="footer-col-title">Hours</div>
+      <ul class="footer-links">
+        <li><a href="#">Mon–Fri · 7:30–5:00</a></li>
+        <li><a href="#">Saturday · 7:30–6:00</a></li>
+        <li><a href="#">Sunday · 8:00–5:00</a></li>
+      </ul>
     </div>
     <div>
-      <div class="f-col-title">Connect</div>
-      <ul class="f-links"><li><a href="tel:6825034019">(682) 503-4019</a></li><li><a href="mailto:atgreennestcafe@gmail.com">atgreennestcafe@gmail.com</a></li><li><a href="#">@greennestcafe</a></li></ul>
+      <div class="footer-col-title">Connect</div>
+      <ul class="footer-links">
+        <li><a href="tel:6825034019">(682) 503-4019</a></li>
+        <li><a href="mailto:atgreennestcafe@gmail.com">atgreennestcafe@gmail.com</a></li>
+        <li><a href="#">@greennestcafe</a></li>
+      </ul>
     </div>
   </div>
   <div class="footer-bottom">
     <span>© 2026 Green Nest Cafe. All rights reserved.</span>
-    <span>3708 Cheek Sparger Rd #110, Bedford, TX</span>
+    <span>Bedford, TX</span>
   </div>
 </footer>
 
 <script>
-window.addEventListener('load',()=>{setTimeout(()=>document.getElementById('loader').classList.add('done'),1800)});
-window.addEventListener('scroll',()=>{document.getElementById('header').classList.toggle('scrolled',window.scrollY>60)});
-const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-const today=days[new Date().getDay()];
-document.querySelectorAll('.hr-row').forEach(r=>{
-  const d=r.querySelector('.hr-day');
-  if(d&&d.textContent.trim()===today)r.classList.add('today');
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('solid', window.scrollY > 50);
 });
-document.querySelectorAll('.tab-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+
+// Mobile menu
+const burger = document.getElementById('burger');
+const mobileMenu = document.getElementById('mobileMenu');
+const menuClose = document.getElementById('menuClose');
+burger.addEventListener('click', () => mobileMenu.classList.add('open'));
+menuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+mobileMenu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+});
+
+// Today highlight
+const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const today = days[new Date().getDay()];
+document.querySelectorAll('.hours-day').forEach(el => {
+  if (el.textContent.trim() === today) el.closest('.hours-row').classList.add('today');
+});
+
+// Tabs
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
   });
 });
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.08});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// Reveal on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
