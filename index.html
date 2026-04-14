@@ -9,11 +9,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --sage:       #6B8F5E;
-  --sage-deep:  #4A6840;
-  --sage-dark:  #3A5430;
-  --sage-light: #A8BFA0;
-  --sage-pale:  #EAF0E6;
+  --sage:       #687c4b;
+  --sage-deep:  #4a6030;
+  --sage-dark:  #3a5025;
+  --sage-light: #a0b080;
+  --sage-pale:  #edf0e5;
   --white:      #FFFFFF;
   --warm-white: #FAF8F5;
   --linen:      #F2EDE6;
@@ -87,78 +87,70 @@ header.scrolled .nav-visit:hover { background:var(--sage-deep)!important; }
 
 /* ── HERO ── */
 .hero {
-  min-height:100vh; background:var(--sage);
+  min-height:100vh; background:#687c4b;
   display:flex; flex-direction:column; align-items:center; justify-content:center;
   text-align:center; position:relative; overflow:hidden;
   padding:6rem 2rem 4rem;
 }
-/* Subtle vignette */
 .hero::after {
   content:''; position:absolute; inset:0; pointer-events:none;
-  background:radial-gradient(ellipse at 50% 50%, transparent 50%, rgba(40,60,35,0.25) 100%);
+  background:radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(30,45,20,0.18) 100%);
 }
-/* Decorative rings */
-.hero-ring {
-  position:absolute; border-radius:50%; border:1px solid rgba(255,255,255,0.07);
-  top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none;
-}
-.hero-ring:nth-child(1) { width:min(85vmin,700px); height:min(85vmin,700px); }
-.hero-ring:nth-child(2) { width:min(65vmin,530px); height:min(65vmin,530px); border-color:rgba(255,255,255,0.05); }
-.hero-ring:nth-child(3) { width:min(46vmin,380px); height:min(46vmin,380px); border-color:rgba(255,255,255,0.04); }
-
 .hero-content {
   position:relative; z-index:2;
   display:flex; flex-direction:column; align-items:center;
-  opacity:0; animation:fadeUp 1s ease 2.2s forwards;
 }
-
-/* Logo in hero */
-.hero-logo {
-  width:clamp(140px, 18vw, 200px);
-  height:clamp(140px, 18vw, 200px);
-  border-radius:50%; object-fit:cover;
-  margin-bottom:clamp(2rem, 4vw, 3.5rem);
+/* Logo */
+.hero-content > img {
+  width:clamp(130px,16vw,190px);
+  height:auto;
+  object-fit:contain;
   display:block;
+  margin:0 auto 3rem;
 }
-
-/* Main headline — very large, tight */
+/* GREEN NEST — massive, tight, centered */
 .hero-h1 {
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(5rem, 14vw, 13rem);
+  font-size:clamp(6rem,16vw,15rem);
   font-weight:600;
-  color:var(--white);
-  line-height:0.85;
-  letter-spacing:0.02em;
-  margin-bottom:clamp(0.5rem, 1vw, 1rem);
+  color:#ffffff;
+  line-height:0.82;
+  letter-spacing:0.01em;
+  text-align:center;
+  margin:0 0 0.5rem 0;
 }
+/* CAFE — light weight, very spaced */
 .hero-cafe {
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(1.8rem, 4.5vw, 4.5rem);
+  font-size:clamp(2rem,5vw,5rem);
   font-weight:300;
-  color:rgba(255,255,255,0.6);
-  letter-spacing:0.45em;
+  color:rgba(255,255,255,0.55);
+  letter-spacing:0.55em;
   text-transform:uppercase;
-  margin-bottom:clamp(1.5rem, 3vw, 2.5rem);
+  text-align:center;
+  margin:0 0 2.5rem 0;
+  padding-left:0.55em; /* compensate letter-spacing so it looks centered */
 }
-.hero-rule { width:36px; height:1px; background:rgba(255,255,255,0.3); margin:0 auto clamp(1.2rem,2.5vw,2rem); }
+.hero-rule { width:32px; height:1px; background:rgba(255,255,255,0.28); margin:0 auto 1.8rem; }
 .hero-sub {
-  font-size:0.62rem; font-weight:300; letter-spacing:0.42em; text-transform:uppercase;
-  color:rgba(255,255,255,0.4); margin-bottom:clamp(2rem, 4vw, 3rem);
+  font-size:0.6rem; font-weight:300; letter-spacing:0.45em; text-transform:uppercase;
+  color:rgba(255,255,255,0.38); margin-bottom:2.8rem;
+  padding-left:0.45em;
 }
 .hero-desc {
-  font-size:clamp(0.9rem,1.2vw,1rem); font-weight:300; line-height:1.9;
-  color:rgba(255,255,255,0.58); max-width:40ch; margin-bottom:clamp(2rem,4vw,3rem);
+  font-size:1rem; font-weight:300; line-height:1.9;
+  color:rgba(255,255,255,0.58); max-width:42ch; margin:0 auto 3rem;
 }
 .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
 .btn-solid {
-  background:var(--white); color:var(--sage-deep);
+  background:#ffffff; color:#4a6030;
   padding:0.85rem 2.2rem; border-radius:50px;
   font-size:0.65rem; font-weight:500; letter-spacing:0.18em; text-transform:uppercase;
   text-decoration:none; transition:all 0.3s;
 }
-.btn-solid:hover { background:var(--linen); transform:translateY(-2px); }
+.btn-solid:hover { background:#edf0e5; transform:translateY(-2px); }
 .btn-outline {
-  border:1px solid rgba(255,255,255,0.38); color:var(--white);
+  border:1px solid rgba(255,255,255,0.38); color:#ffffff;
   padding:0.85rem 2.2rem; border-radius:50px;
   font-size:0.65rem; font-weight:300; letter-spacing:0.18em; text-transform:uppercase;
   text-decoration:none; transition:all 0.3s;
@@ -173,7 +165,7 @@ header.scrolled .nav-visit:hover { background:var(--sage-deep)!important; }
 .scroll-hint-line { width:1px; height:28px; background:linear-gradient(to bottom,rgba(255,255,255,0.28),transparent); }
 @keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-6px)} }
 
-/* ── MARQUEE ── */
+/* ── MARQUEE/* ── MARQUEE ── */
 .marquee { background:var(--sage-dark); padding:0.8rem 0; overflow:hidden; }
 .marquee-track { display:flex; white-space:nowrap; animation:scroll 26s linear infinite; }
 @keyframes scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
@@ -197,7 +189,7 @@ header.scrolled .nav-visit:hover { background:var(--sage-deep)!important; }
 .ey-line { width:18px; height:1px; background:var(--sage-light); flex-shrink:0; }
 .h2 {
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(3rem,5vw,5rem); font-weight:500;
+  font-size:clamp(3.2rem,5.5vw,5.5rem); font-weight:500;
   line-height:1.05; letter-spacing:-0.01em; color:var(--text); margin-bottom:1.5rem;
 }
 .h2 em { font-style:italic; color:var(--sage); }
@@ -206,7 +198,7 @@ header.scrolled .nav-visit:hover { background:var(--sage-deep)!important; }
 
 /* ── ABOUT ── */
 .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:6vw; align-items:center; }
-.about-p { font-size:1.05rem; font-weight:300; line-height:2; color:var(--text-soft); margin-bottom:1.6rem; }
+.about-p { font-size:1.05rem; font-weight:300; line-height:2; color:var(--text-soft); margin-bottom:1.6rem; max-width:48ch; }
 .about-p strong { color:var(--text-mid); font-weight:500; }
 .about-visual { display:flex; flex-direction:column; align-items:center; gap:2rem; }
 
@@ -261,7 +253,7 @@ header.scrolled .nav-visit:hover { background:var(--sage-deep)!important; }
 .reviews-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
 .rcard { background:var(--white); border-radius:12px; padding:1.8rem; border:1px solid var(--linen-deep); transition:transform 0.3s,box-shadow 0.3s; }
 .rcard:hover { transform:translateY(-3px); box-shadow:0 10px 28px rgba(0,0,0,0.06); }
-.rcard-stars { color:#7A9A6A; font-size:0.8rem; letter-spacing:2px; margin-bottom:1rem; }
+.rcard-stars { color:#7a8f5a; font-size:0.8rem; letter-spacing:2px; margin-bottom:1rem; }
 .rcard-q { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-style:italic; font-weight:400; color:var(--text); line-height:1.7; margin-bottom:1.3rem; }
 .rcard-meta { display:flex; align-items:center; gap:0.7rem; }
 .rcard-av { width:30px; height:30px; border-radius:50%; background:var(--sage-pale); display:flex; align-items:center; justify-content:center; font-size:0.6rem; font-weight:500; color:var(--sage-deep); flex-shrink:0; }
@@ -525,7 +517,7 @@ footer { background:var(--text); padding:5rem 5vw 2.5rem; }
       </div>
       <div style="text-align:right" class="reveal d2">
         <div style="font-family:'Cormorant Garamond',serif;font-size:3.2rem;font-weight:500;color:var(--sage);line-height:1">4.9</div>
-        <div style="color:#7A9A6A;font-size:0.85rem;letter-spacing:2px;margin-bottom:3px">★★★★★</div>
+        <div style="color:#7a8f5a;font-size:0.85rem;letter-spacing:2px;margin-bottom:3px">★★★★★</div>
         <div style="font-size:0.56rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-soft)">Hundreds of Reviews</div>
       </div>
     </div>
