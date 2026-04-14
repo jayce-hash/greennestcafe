@@ -197,7 +197,7 @@ header.scrolled .nav-visit:hover { background:var(--sage-deep)!important; }
 .ey-line { width:18px; height:1px; background:var(--sage-light); flex-shrink:0; }
 .h2 {
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(2.4rem,4vw,3.8rem); font-weight:500;
+  font-size:clamp(3rem,5vw,5rem); font-weight:500;
   line-height:1.05; letter-spacing:-0.01em; color:var(--text); margin-bottom:1.5rem;
 }
 .h2 em { font-style:italic; color:var(--sage); }
@@ -206,23 +206,15 @@ header.scrolled .nav-visit:hover { background:var(--sage-deep)!important; }
 
 /* ── ABOUT ── */
 .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:6vw; align-items:center; }
-.about-p { font-size:1rem; font-weight:300; line-height:1.9; color:var(--text-soft); margin-bottom:1.2rem; }
+.about-p { font-size:1.05rem; font-weight:300; line-height:2; color:var(--text-soft); margin-bottom:1.6rem; }
 .about-p strong { color:var(--text-mid); font-weight:500; }
 .about-visual { display:flex; flex-direction:column; align-items:center; gap:2rem; }
-.about-circle {
-  width:clamp(200px,26vw,300px); height:clamp(200px,26vw,300px);
-  border-radius:50%; background:var(--sage);
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  position:relative; box-shadow:0 16px 50px rgba(107,143,94,0.2);
-}
-.about-circle::before { content:''; position:absolute; inset:-12px; border-radius:50%; border:1px solid rgba(107,143,94,0.18); }
-.about-circle::after { content:''; position:absolute; inset:-24px; border-radius:50%; border:1px dashed rgba(107,143,94,0.09); }
-.about-circle-name {
-  font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:600;
-  color:var(--white); letter-spacing:0.06em; line-height:1; text-align:center;
-}
-.about-circle-div { width:30px; height:1px; background:rgba(255,255,255,0.3); margin:0.6rem 0; }
-.about-circle-sub { font-size:0.58rem; letter-spacing:0.36em; text-transform:uppercase; color:rgba(255,255,255,0.55); }
+
+
+
+
+
+
 .about-stats { display:flex; gap:3rem; justify-content:center; }
 .astat { text-align:center; }
 .astat-n { font-family:'Cormorant Garamond',serif; font-size:2.2rem; font-weight:500; color:var(--sage); line-height:1; }
@@ -340,7 +332,7 @@ footer { background:var(--text); padding:5rem 5vw 2.5rem; }
 <!-- HEADER -->
 <header id="header">
   <a href="#" class="header-left">
-    <img src="Untitled design.png" alt="Green Nest Cafe" style="width:44px;height:44px;border-radius:50%;object-fit:cover;">
+    <img src="Untitled design.png" alt="Green Nest Cafe" style="width:44px;height:44px;object-fit:contain;">
     
     <div class="header-brand-col">
       <span class="header-brand-name">Green Nest Cafe</span>
@@ -357,11 +349,9 @@ footer { background:var(--text); padding:5rem 5vw 2.5rem; }
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-ring"></div>
-  <div class="hero-ring"></div>
-  <div class="hero-ring"></div>
+  
   <div class="hero-content">
-    <img src="Untitled design.png" alt="Green Nest Cafe" style="width:clamp(140px,18vw,200px);height:clamp(140px,18vw,200px);border-radius:50%;object-fit:cover;display:block;margin:0 auto 2.5rem;">
+    <img src="Untitled design.png" alt="Green Nest Cafe" style="width:clamp(140px,18vw,200px);height:auto;object-fit:contain;display:block;margin:0 auto 2.5rem;">
     
     <h1 class="hero-h1">GREEN<br>NEST</h1>
     <div class="hero-cafe">Cafe</div>
@@ -413,13 +403,7 @@ footer { background:var(--text); padding:5rem 5vw 2.5rem; }
         <p class="about-p reveal d2">From our locally roasted espresso drinks to Korean-inspired YUBU dishes and scratch-made sandwiches — every detail is crafted with care. Step in, slow down, and stay a while.</p>
       </div>
       <div class="about-visual reveal d2">
-        <div class="about-circle">
-          <span class="about-circle-name">GREEN<br>NEST</span>
-          <div class="about-circle-div"></div>
-          <span class="about-circle-sub">Cafe</span>
-        </div>
-        <div class="about-stats">
-          <div class="astat"><div class="astat-n">4.9★</div><div class="astat-l">Rating</div></div>
+        
           <div class="astat"><div class="astat-n">7</div><div class="astat-l">Days Open</div></div>
           <div class="astat"><div class="astat-n">100%</div><div class="astat-l">Scratch-Made</div></div>
         </div>
@@ -603,7 +587,7 @@ footer { background:var(--text); padding:5rem 5vw 2.5rem; }
   <div class="footer-grid">
     <div>
       
-      <img src="Untitled design.png" alt="Green Nest Cafe" style="width:64px;height:64px;border-radius:50%;object-fit:cover;display:block;margin-bottom:1rem;">
+      <img src="Untitled design.png" alt="Green Nest Cafe" style="width:64px;height:auto;object-fit:contain;display:block;margin-bottom:1rem;">
       <span class="f-name">Green Nest Cafe</span>
       <span class="f-tag">Sip, Relax &amp; Reflect · Bedford, Texas</span>
       <p class="f-body">A cozy, light-filled neighborhood cafe where every cup is made with care and every guest feels at home.</p>
