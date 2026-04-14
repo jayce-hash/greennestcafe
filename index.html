@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Green Nest Cafe is Bedford's beloved neighborhood gathering spot serving exquisite locally roasted coffee, fresh breads, and unique dishes like YUBU and Avocado Toast.">
+    <meta name="keywords" content="Green Nest Cafe, Bedford cafe, coffee shop Bedford TX, Ube Latte, YUBU, locally roasted coffee, avocado toast, community cafe">
+    <title>Green Nest Cafe | Bedford, TX</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS Variables for consistent theming */
+        :root {
+            --primary-green: #3A5A40;
+            --light-green: #A3B18A;
+            --bg-cream: #F9F6F0;
+            --text-dark: #333333;
+            --text-light: #F4F1DE;
+            --white: #FFFFFF;
+        }
+
+        /* Base Styles & Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-cream);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Lora', serif;
+            color: var(--primary-green);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Layout Container */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-family: 'Lora', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-green);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--light-green);
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: var(--primary-green);
+            color: var(--text-light);
+            text-align: center;
+            padding: 6rem 1rem;
+        }
+
+        .hero h1 {
+            color: var(--text-light);
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+            font-weight: 300;
+        }
+
+        .btn {
+            background-color: var(--light-green);
+            color: var(--text-dark);
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: var(--text-light);
+            transform: translateY(-2px);
+        }
+
+        /* Sections General */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* About Section */
+        .about-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Menu Highlights Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border-top: 4px solid var(--light-green);
+        }
+
+        .menu-item h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Reviews Section */
+        .reviews {
+            background-color: var(--white);
+        }
+
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .review-card {
+            background: var(--bg-cream);
+            padding: 2rem;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .stars {
+            color: #f5b301;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .review-text {
+            font-style: italic;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact & Hours Section */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .info-card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .info-card h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .info-card ul {
+            list-style: none;
+        }
+
+        .info-card li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-green);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* In a real site, add a hamburger menu here */
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .info-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Green Nest Cafe</a>
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#menu">Menu Highlights</a>
+                    <a href="#reviews">Reviews</a>
+                    <a href="#visit">Visit Us</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Your Cherished Neighborhood Coffee Spot</h1>
+            <p>A welcoming Bedford community hub serving exquisite locally roasted coffee, scratch-made dishes, and genuine hospitality.</p>
+            <a href="#visit" class="btn">Visit Us Today</a>
+        </div>
+    </section>
+
+    <section id="about" class="container">
+        <h2 class="section-title">About Green Nest Cafe</h2>
+        <div class="about-content">
+            <p>Welcome to Green Nest Cafe, Bedford's beloved neighborhood gathering spot where genuine hospitality meets exceptional coffee. With a 4.9-star rating from hundreds of loyal customers, our independent cafe crafts rich, exquisite coffee and surprising menu offerings that celebrate quality over convenience.</p>
+            <br>
+            <p>Step into our charming, cozy space and discover why community members keep coming back. Whether you're meeting a good friend or looking for a quiet corner to focus, great coffee tastes even better when it's made with care by neighbors who truly know your name.</p>
+        </div>
+    </section>
+
+    <section id="menu" style="background-color: var(--white);">
+        <div class="container">
+            <h2 class="section-title">Menu Highlights</h2>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <h3>Exquisite Coffee</h3>
+                    <p>Locally roasted, rich, smooth, and perfectly balanced. From classic drip to artisanal vanilla lattes.</p>
+                </div>
+                <div class="menu-item">
+                    <h3>Signature Ube Latte</h3>
+                    <p>A vibrant, sweet, and nutty favorite. Pair it with our fresh matcha drinks for the perfect morning pick-me-up.</p>
+                </div>
+                <div class="menu-item">
+                    <h3>Korean YUBU & Bowls</h3>
+                    <p>Try our unique sushi-style YUBU dishes and fresh, flavorful Korean bulgogi rice bowls.</p>
+                </div>
+                <div class="menu-item">
+                    <h3>Fresh Baked & Scratch-Made</h3>
+                    <p>Featuring local baked breads, fresh avocado toast, and our fan-favorite spicy hummus egg & cheese sandwich.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="reviews">
+        <div class="container">
+            <h2 class="section-title">What Our Community Says</h2>
+            <div class="review-grid">
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"The coffee was absolutely exquisite—rich, smooth, and perfectly balanced. The avocado toast was just as impressive. You can really tell they care about quality and detail. I'll definitely be coming back!"</p>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"I’m a big ube latte fan, so I tried their Ube Latte with Korean UBU rice. Seriously, such a good choice... The staff was super friendly and answered all our random questions."</p>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"An absolute gem tucked into the neighborhood—offering a refreshingly cozy ambiance that’s both cute and calming... The food menu is equally impressive, offering fresh and flavorful options."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="visit" class="container">
+        <h2 class="section-title">Plan Your Visit</h2>
+        <div class="info-grid">
+            
+            <div class="info-card">
+                <h3>Opening Hours</h3>
+                <ul>
+                    <li><span>Monday</span> <span>7:30 AM – 5:00 PM</span></li>
+                    <li><span>Tuesday</span> <span>7:30 AM – 5:00 PM</span></li>
+                    <li><span>Wednesday</span> <span>7:30 AM – 5:00 PM</span></li>
+                    <li><span>Thursday</span> <span>7:30 AM – 5:00 PM</span></li>
+                    <li><span>Friday</span> <span>7:30 AM – 5:00 PM</span></li>
+                    <li><span>Saturday</span> <span>7:30 AM – 6:00 PM</span></li>
+                    <li><span>Sunday</span> <span>8:00 AM – 5:00 PM</span></li>
+                </ul>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;"><em>Takeout · Dine-in · In-store pickup</em></p>
+            </div>
+
+            <div class="info-card">
+                <h3>Location & Contact</h3>
+                <p style="margin-bottom: 1rem;">
+                    <strong>Green Nest Cafe</strong><br>
+                    3708 Cheek Sparger Rd #110<br>
+                    Bedford, TX, United States
+                </p>
+                <p style="margin-bottom: 0.5rem;"><strong>Phone:</strong> (682) 503-4019</p>
+                <p style="margin-bottom: 0.5rem;"><strong>Email:</strong> atgreennestcafe@gmail.com</p>
+                <p><strong>Social:</strong> @greennestcafe</p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Green Nest Cafe. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
