@@ -3,11 +3,51 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Green Nest Cafe — Sip, Relax & Reflect</title>
+
+<title>Green Nest Cafe | Sip, Relax & Reflect in Bedford, TX</title>
+<meta name="description" content="Green Nest Cafe is Bedford's beloved neighborhood gathering spot. Enjoy genuine hospitality, exceptional coffee, Korean-inspired dishes, and scratch-made sandwiches.">
+<meta name="keywords" content="Green Nest Cafe, Coffee Shop Bedford TX, Cafe, Espresso, YUBU, Matcha, Cold Brew, Breakfast, Local Coffee">
+<meta name="author" content="Green Nest Cafe">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.greennestcafe.com/">
+
+<meta property="og:title" content="Green Nest Cafe | Sip, Relax & Reflect">
+<meta property="og:description" content="A neighborhood cafe built to make you feel at home. Experience our locally roasted espresso, signature lattes, and scratch-made menu in Bedford, Texas.">
+<meta property="og:image" content="Untitled design.png">
+<meta property="og:url" content="https://www.greennestcafe.com/">
+<meta property="og:type" content="restaurant.cafe">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CafeOrCoffeeShop",
+  "name": "Green Nest Cafe",
+  "image": "Untitled design.png",
+  "url": "https://www.greennestcafe.com/",
+  "telephone": "+16825034019",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "3708 Cheek Sparger Rd #110",
+    "addressLocality": "Bedford",
+    "addressRegion": "TX",
+    "addressCountry": "US"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "250"
+  },
+  "servesCuisine": ["Coffee", "Breakfast", "Sandwiches", "Korean-inspired"],
+  "openingHours": "Mo,Tu,We,Th,Fr 07:30-17:00, Sa 07:30-18:00, Su 08:00-17:00"
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
 <style>
+/* ===================== CSS RESET & VARIABLES ===================== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
@@ -34,7 +74,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ===================== NAV ===================== */
+/* ===================== NAV (Mobile First) ===================== */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
@@ -56,7 +96,8 @@ nav.solid {
 }
 nav.solid .nav-logo-text { color: var(--green-d); }
 
-.nav-links { display: flex; align-items: center; gap: 2rem; }
+/* Hidden on mobile, shown on desktop */
+.nav-links { display: none; align-items: center; gap: 2rem; }
 .nav-links a {
   font-size: 0.7rem; font-weight: 400; letter-spacing: 0.15em;
   text-transform: uppercase; color: rgba(255,255,255,0.8);
@@ -83,7 +124,7 @@ nav.solid .nav-cta:hover { background: var(--green-d) !important; border-color: 
 
 /* Mobile nav toggle */
 .nav-burger {
-  display: none; flex-direction: column; gap: 5px;
+  display: flex; flex-direction: column; gap: 5px;
   background: none; border: none; cursor: pointer; padding: 4px;
 }
 .nav-burger span {
@@ -111,7 +152,7 @@ nav.solid .nav-burger span { background: var(--ink); }
   font-size: 1.5rem; color: var(--white); opacity: 0.7;
 }
 
-/* ===================== HERO ===================== */
+/* ===================== HERO (Mobile First) ===================== */
 .hero {
   min-height: 100svh; background: var(--green);
   display: flex; flex-direction: column;
@@ -119,7 +160,6 @@ nav.solid .nav-burger span { background: var(--ink); }
   text-align: center; padding: 100px 6vw 60px;
   position: relative; overflow: hidden;
 }
-/* Subtle texture overlay */
 .hero::before {
   content: ''; position: absolute; inset: 0;
   background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(255,255,255,0.04) 0%, transparent 70%);
@@ -143,7 +183,7 @@ nav.solid .nav-burger span { background: var(--ink); }
   font-size: clamp(1.5rem, 4vw, 3.5rem);
   font-weight: 300; color: rgba(255,255,255,0.5);
   letter-spacing: 0.5em; text-transform: uppercase;
-  padding-left: 0.5em; /* visual centering with letter-spacing */
+  padding-left: 0.5em; 
   margin-bottom: clamp(2rem, 4vw, 3rem);
   position: relative; z-index: 1;
 }
@@ -157,7 +197,12 @@ nav.solid .nav-burger span { background: var(--ink); }
 }
 .hero-actions {
   display: flex; gap: 1rem; flex-wrap: wrap;
+  flex-direction: column; align-items: center; /* Mobile default */
   justify-content: center; position: relative; z-index: 1;
+  width: 100%;
+}
+.hero-actions a {
+  width: 100%; max-width: 280px; text-align: center;
 }
 .btn-primary {
   background: var(--white); color: var(--green-d);
@@ -232,17 +277,18 @@ h2 em { font-style: italic; color: var(--green); }
   color: var(--mid); max-width: 52ch;
 }
 
-/* ===================== ABOUT ===================== */
+/* ===================== ABOUT (Mobile First) ===================== */
 .about { background: var(--white); }
 .about-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
+  display: grid; grid-template-columns: 1fr; /* Mobile default */
   gap: clamp(3rem, 6vw, 7rem); align-items: center;
 }
 .about-text .body-text { margin-bottom: 1.4rem; }
 .about-text .body-text strong { color: var(--ink); font-weight: 500; }
 .about-stats {
-  display: flex; gap: 2.5rem; margin-top: 2.5rem;
+  display: flex; gap: 1.5rem; margin-top: 2.5rem;
   padding-top: 2.5rem; border-top: 1px solid var(--stone);
+  flex-wrap: wrap; /* Mobile default */
 }
 .stat-num {
   font-family: 'Cormorant Garamond', serif;
@@ -256,15 +302,16 @@ h2 em { font-style: italic; color: var(--green); }
 .about-image {
   background: var(--green-p);
   border-radius: 4px;
-  aspect-ratio: 4/5;
+  aspect-ratio: 3/2; /* Mobile default */
   display: flex; align-items: center; justify-content: center;
   position: relative; overflow: hidden;
+  order: -1; /* Mobile default: image on top */
 }
 .about-image-inner {
   width: 55%; height: auto; opacity: 0.35;
 }
 .about-image-tag {
-  position: absolute; bottom: 2rem; left: 2rem; right: 2rem;
+  position: absolute; bottom: 1rem; left: 1rem; right: 1rem;
   background: var(--white); border-radius: 8px;
   padding: 1rem 1.2rem;
   display: flex; align-items: center; justify-content: space-between;
@@ -282,7 +329,7 @@ h2 em { font-style: italic; color: var(--green); }
   font-size: 1.4rem; font-weight: 500; color: var(--green);
 }
 
-/* ===================== MENU ===================== */
+/* ===================== MENU (Mobile First) ===================== */
 .menu-section { background: var(--cream); }
 .menu-header {
   display: flex; justify-content: space-between;
@@ -311,7 +358,11 @@ h2 em { font-style: italic; color: var(--green); }
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
-.menu-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 4rem; }
+.menu-cols { 
+  display: grid; 
+  grid-template-columns: 1fr; /* Mobile default */
+  gap: 0 4rem; 
+}
 
 .menu-cat {
   font-family: 'Cormorant Garamond', serif;
@@ -352,7 +403,7 @@ h2 em { font-style: italic; color: var(--green); }
   font-family: 'DM Sans', sans-serif;
 }
 
-/* ===================== REVIEWS ===================== */
+/* ===================== REVIEWS (Mobile First) ===================== */
 .reviews { background: var(--sand); }
 .reviews-header {
   display: flex; justify-content: space-between; align-items: flex-end;
@@ -364,7 +415,11 @@ h2 em { font-style: italic; color: var(--green); }
 }
 .rating-stars { color: var(--green-l); font-size: 0.85rem; letter-spacing: 3px; margin: 4px 0; }
 .rating-count { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
-.reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.reviews-grid { 
+  display: grid; 
+  grid-template-columns: 1fr; /* Mobile default */
+  gap: 1.5rem; 
+}
 .review-card {
   background: var(--white); border-radius: 8px;
   padding: 1.75rem; transition: transform 0.3s, box-shadow 0.3s;
@@ -378,13 +433,17 @@ h2 em { font-style: italic; color: var(--green); }
 }
 .review-author { font-size: 0.68rem; font-weight: 400; color: var(--muted); letter-spacing: 0.05em; }
 
-/* ===================== VISIT ===================== */
+/* ===================== VISIT (Mobile First) ===================== */
 .visit { background: var(--green); }
 .visit h2 { color: var(--white); }
 .visit h2 em { color: rgba(255,255,255,0.5); }
 .visit .label { color: rgba(255,255,255,0.5); }
 .visit .label::before { background: rgba(255,255,255,0.3); }
-.visit-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+.visit-grid { 
+  display: grid; 
+  grid-template-columns: 1fr; /* Mobile default */
+  gap: 1.5rem; margin-top: 3rem; 
+}
 .visit-card {
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.12);
@@ -450,13 +509,14 @@ h2 em { font-style: italic; color: var(--green); }
 }
 .map-address strong { display: block; color: var(--green-d); font-weight: 500; margin-bottom: 1px; }
 
-/* ===================== FOOTER ===================== */
+/* ===================== FOOTER (Mobile First) ===================== */
 footer {
   background: var(--ink); padding: 4rem 5vw 2rem;
 }
 .footer-grid {
   max-width: 1160px; margin: 0 auto;
-  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  display: grid; 
+  grid-template-columns: 1fr; /* Mobile default */
   gap: 3rem; padding-bottom: 3rem;
   border-bottom: 1px solid rgba(255,255,255,0.07);
 }
@@ -495,30 +555,34 @@ footer {
 .delay-2 { transition-delay: 0.2s; }
 .delay-3 { transition-delay: 0.3s; }
 
-/* ===================== RESPONSIVE ===================== */
-@media (max-width: 900px) {
-  .nav-links { display: none; }
-  .nav-burger { display: flex; }
-  .about-grid { grid-template-columns: 1fr; }
-  .about-image { order: -1; aspect-ratio: 3/2; }
-  .menu-cols { grid-template-columns: 1fr; }
-  .reviews-grid { grid-template-columns: 1fr; }
-  .visit-grid { grid-template-columns: 1fr; }
+/* ===================== RESPONSIVE (min-width media queries) ===================== */
+/* Tablets and small desktops */
+@media (min-width: 561px) {
+  .hero-actions { flex-direction: row; justify-content: center; }
+  .hero-actions a { width: auto; }
+  .about-stats { gap: 2.5rem; flex-wrap: nowrap; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
-@media (max-width: 560px) {
-  .footer-grid { grid-template-columns: 1fr; }
-  .hero-actions { flex-direction: column; align-items: center; }
-  .about-stats { gap: 1.5rem; }
+
+/* Desktops */
+@media (min-width: 901px) {
+  .nav-burger { display: none; }
+  .nav-links { display: flex; }
+  .about-grid { grid-template-columns: 1fr 1fr; }
+  .about-image { order: 0; aspect-ratio: 4/5; }
+  .about-image-tag { bottom: 2rem; left: 2rem; right: 2rem; }
+  .menu-cols { grid-template-columns: 1fr 1fr; }
+  .reviews-grid { grid-template-columns: repeat(3, 1fr); }
+  .visit-grid { grid-template-columns: 1fr 1fr 1fr; }
+  .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav id="nav">
   <a href="#" class="nav-logo">
-    <img src="Untitled design.png" alt="Green Nest Cafe">
+    <img src="Untitled design.png" alt="Green Nest Cafe Logo">
     <span class="nav-logo-text">Green Nest Cafe</span>
   </a>
   <div class="nav-links">
@@ -527,23 +591,21 @@ footer {
     <a href="#reviews">Reviews</a>
     <a href="#visit" class="nav-cta">Visit Us</a>
   </div>
-  <button class="nav-burger" id="burger" aria-label="Menu">
+  <button class="nav-burger" id="burger" aria-label="Open Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
-<!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-close" id="menuClose">✕</button>
+  <button class="mobile-close" id="menuClose" aria-label="Close Menu">✕</button>
   <a href="#about" class="menu-link">About</a>
   <a href="#menu" class="menu-link">Menu</a>
   <a href="#reviews" class="menu-link">Reviews</a>
   <a href="#visit" class="menu-link">Visit Us</a>
 </div>
 
-<!-- HERO -->
-<section class="hero">
-  <img class="hero-logo" src="Untitled design.png" alt="Green Nest Cafe">
+<header class="hero">
+  <img class="hero-logo" src="Untitled design.png" alt="Green Nest Cafe Logo Graphic">
   <h1 class="hero-title">GREEN<br>NEST</h1>
   <p class="hero-sub">Cafe</p>
   <p class="hero-tagline">Bedford, Texas &nbsp;·&nbsp; Sip, Relax &amp; Reflect</p>
@@ -555,10 +617,9 @@ footer {
     <div class="hero-scroll-line"></div>
     <span>Scroll</span>
   </div>
-</section>
+</header>
 
-<!-- TICKER -->
-<div class="ticker">
+<div class="ticker" aria-hidden="true">
   <div class="ticker-track">
     <span class="ticker-item"><span class="ticker-dot">✦</span> Honey Lavender Latte</span>
     <span class="ticker-item"><span class="ticker-dot">✦</span> Tiramisu Cold Brew</span>
@@ -583,7 +644,6 @@ footer {
   </div>
 </div>
 
-<!-- ABOUT -->
 <section class="about" id="about">
   <div class="container">
     <div class="about-grid">
@@ -608,7 +668,7 @@ footer {
         </div>
       </div>
       <div class="about-image reveal delay-2">
-        <img class="about-image-inner" src="Untitled design.png" alt="">
+        <img class="about-image-inner" src="Untitled design.png" alt="Green Nest Cafe Interior in Bedford, Texas">
         <div class="about-image-tag">
           <div>
             <div class="about-image-tag-name">Green Nest Cafe</div>
@@ -621,7 +681,6 @@ footer {
   </div>
 </section>
 
-<!-- MENU -->
 <section class="menu-section" id="menu">
   <div class="container">
     <div class="menu-header">
@@ -632,40 +691,43 @@ footer {
       <p class="reveal delay-2">Prices subject to change · Please inform us of allergies<br>Gluten free bread +$1.75</p>
     </div>
 
-    <div class="tab-row">
-      <button class="tab active" data-tab="drinks">Drinks</button>
-      <button class="tab" data-tab="food">Food</button>
-      <button class="tab" data-tab="dessert">Dessert &amp; Pastries</button>
+    <div class="tab-row" role="tablist">
+      <button class="tab active" data-tab="drinks" role="tab" aria-selected="true">Drinks</button>
+      <button class="tab" data-tab="food" role="tab" aria-selected="false">Food</button>
+      <button class="tab" data-tab="dessert" role="tab" aria-selected="false">Dessert &amp; Pastries</button>
     </div>
 
-    <!-- DRINKS -->
-    <div class="tab-content active" id="tab-drinks">
+    <div class="tab-content active" id="tab-drinks" role="tabpanel">
       <div class="menu-cols">
         <div>
-          <div class="menu-cat">Espresso <span class="menu-cat-note">8oz hot / 12·16·20oz iced</span></div>
+          <h3 class="menu-cat">Espresso <span class="menu-cat-note">8oz hot / 12·16·20oz iced</span></h3>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Double Shots</div></div><div class="menu-price">$3</div></div>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Macchiato</div></div><div class="menu-price">$3.25</div></div>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Cortado</div></div><div class="menu-price">$3.75</div></div>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Flat White</div></div><div class="menu-price">$4</div></div>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Americano</div></div><div class="menu-price">$3.5 / 4 / 5.75</div></div>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Latte</div></div><div class="menu-price">$4.25 / 4.5 / 4.75 / 5.25</div></div>
-          <div class="menu-cat">Coffee</div>
+          
+          <h3 class="menu-cat">Coffee</h3>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Drip Coffee</div></div><div class="menu-price">$3 / 3.5</div></div>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Pour Over (12oz)</div></div><div class="menu-price">$4.75</div></div>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Cold Brew</div></div><div class="menu-price">$5.25 / 5.75 / 6.25</div></div>
-          <div class="menu-cat">Other Latte <span class="menu-cat-note">12·16·20oz iced only</span></div>
+          
+          <h3 class="menu-cat">Other Latte <span class="menu-cat-note">12·16·20oz iced only</span></h3>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Matcha / Hojicha</div></div><div class="menu-price">$4.75 / 5.25 / 5.75</div></div>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Ube</div></div><div class="menu-price">$4.75 / 5.25 / 5.75</div></div>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Chai</div></div><div class="menu-price">$5.0 / 5.5 / 6.0</div></div>
-          <div class="menu-cat">Frappe <span class="menu-cat-note">16oz / 20oz</span></div>
+          
+          <h3 class="menu-cat">Frappe <span class="menu-cat-note">16oz / 20oz</span></h3>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Espresso / Matcha / Hojicha</div></div><div class="menu-price">$6.25 / 6.75</div></div>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Chai / Ube / Vanilla / Mocha</div></div><div class="menu-price">$6.25 / 6.75</div></div>
-          <div class="menu-cat">Loose Leaf Tea <span class="menu-cat-note">*Decaf avail. · $4</span></div>
+          
+          <h3 class="menu-cat">Loose Leaf Tea <span class="menu-cat-note">*Decaf avail. · $4</span></h3>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Hot</div><div class="menu-desc">Earl Grey · Rooibos* · Chamomile* · Green · Oolong · White</div></div><div class="menu-price">$4</div></div>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Iced</div><div class="menu-desc">Black Mango · Hibiscus Berry · Green</div></div><div class="menu-price">$4</div></div>
         </div>
         <div>
-          <div class="menu-cat">Signature Drinks</div>
+          <h3 class="menu-cat">Signature Drinks</h3>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Honey Lavender Latte</div><div class="menu-desc">Honey, lavender syrup, espresso, milk</div></div><div class="menu-price">$5.25 / 5.75 / 6.25</div></div>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Strawberry Matcha Latte <span class="badge">Iced</span></div><div class="menu-desc">Strawberry puree, matcha, milk</div></div><div class="menu-price">$5.25 / 5.75 / 6.25</div></div>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Mango Coconut Hojicha <span class="badge">Iced</span></div><div class="menu-desc">Mango puree, coconut syrup, hojicha, milk</div></div><div class="menu-price">$5.25 / 5.75 / 6.25</div></div>
@@ -678,16 +740,16 @@ footer {
       </div>
     </div>
 
-    <!-- FOOD -->
-    <div class="tab-content" id="tab-food">
+    <div class="tab-content" id="tab-food" role="tabpanel">
       <div class="menu-cols">
         <div>
-          <div class="menu-cat">Breakfast <span class="menu-cat-note">Until 12pm daily</span></div>
+          <h3 class="menu-cat">Breakfast <span class="menu-cat-note">Until 12pm daily</span></h3>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Egg &amp; Cheese Sandwich</div><div class="menu-desc">Egg, cheddar cheese on toasted sourdough</div></div><div class="menu-price">$6.25</div></div>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Avocado Toast</div><div class="menu-desc">Avocado, chili pepper, salt flake on toasted sourdough</div></div><div class="menu-price">$7.25</div></div>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Spicy Hummus &amp; Egg &amp; Cheese</div><div class="menu-desc">Egg, Swiss cheese on toasted sourdough</div></div><div class="menu-price">$7.25</div></div>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Loaded Lox</div><div class="menu-desc">Smoked salmon, cream cheese, dill, capers, red onion, tomato, chili, salt flake, olive oil on sourdough</div></div><div class="menu-price">$12.95</div></div>
-          <div class="menu-cat">Hot Sandwiches <span class="menu-cat-note">With chips or mixed green</span></div>
+          
+          <h3 class="menu-cat">Hot Sandwiches <span class="menu-cat-note">With chips or mixed green</span></h3>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Chicken Pesto</div><div class="menu-desc">Pesto paste, tomato, basil, fresh mozzarella, chicken on sourdough</div></div><div class="menu-price">$10.95</div></div>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Cubano</div><div class="menu-desc">Pulled pork, roasted ham, pickles, yellow mustard, mayo on ciabatta</div></div><div class="menu-price">$11.95</div></div>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Italian</div><div class="menu-desc">Salami, roasted ham, roasted red pepper, banana pickles on ciabatta</div></div><div class="menu-price">$11.95</div></div>
@@ -696,14 +758,16 @@ footer {
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Spicy Jelly Grilled Cheese</div><div class="menu-desc">Spicy jelly, roasted ham, pickles, cheddar &amp; Swiss on sourdough</div></div><div class="menu-price">$10.95</div></div>
         </div>
         <div>
-          <div class="menu-cat">Rice Bowls</div>
+          <h3 class="menu-cat">Rice Bowls</h3>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Bulgogi Rice Bowl</div><div class="menu-desc">Mixed green, cherry tomato, red onion, over easy egg, mayo &amp; BBQ soy garlic sauce</div></div><div class="menu-price">$12.95</div></div>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Spicy Pork</div><div class="menu-desc">Mixed green, cherry tomato, red onion, over easy egg, mayo &amp; comeback sauce</div></div><div class="menu-price">$12.95</div></div>
-          <div class="menu-cat">Salad <span class="menu-cat-note">Add chicken +$2.85</span></div>
+          
+          <h3 class="menu-cat">Salad <span class="menu-cat-note">Add chicken +$2.85</span></h3>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Greek Salad</div><div class="menu-desc">Mixed green, cherry tomato, red onion, over easy egg, mayo &amp; BBQ soy garlic sauce</div></div><div class="menu-price">$9.75</div></div>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Cobb Salad</div><div class="menu-desc">Mixed green, cherry tomato, red onion, over easy egg, mayo &amp; comeback sauce</div></div><div class="menu-price">$10.25</div></div>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Garden Salad</div><div class="menu-desc">Mixed greens, red onion, cucumber, shredded cheese, crouton. Dressing: balsamic / red wine / lime ranch / Italian</div></div><div class="menu-price">$9.75</div></div>
-          <div class="menu-cat">Add-Ons</div>
+          
+          <h3 class="menu-cat">Add-Ons</h3>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Feta Cheese</div></div><div class="menu-price">+$0.75</div></div>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Cherry Tomato</div></div><div class="menu-price">+$1</div></div>
           <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Bacon</div></div><div class="menu-price">+$1.50</div></div>
@@ -716,10 +780,9 @@ footer {
       </div>
     </div>
 
-    <!-- DESSERT -->
-    <div class="tab-content" id="tab-dessert">
+    <div class="tab-content" id="tab-dessert" role="tabpanel">
       <div style="max-width: 480px;">
-        <div class="menu-cat">Dessert &amp; Pastries</div>
+        <h3 class="menu-cat">Dessert &amp; Pastries</h3>
         <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Tiramisu</div><div class="menu-desc">Espresso or Matcha</div></div><div class="menu-price">$6.25</div></div>
         <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Affogato</div><div class="menu-desc">Espresso / Matcha / Hojicha / Ube</div></div><div class="menu-price">$5.50</div></div>
         <div class="menu-row"><div class="menu-row-left"><div class="menu-name">Cookies</div></div><div class="menu-price">$2.25</div></div>
@@ -729,7 +792,6 @@ footer {
   </div>
 </section>
 
-<!-- REVIEWS -->
 <section class="reviews" id="reviews">
   <div class="container">
     <div class="reviews-header">
@@ -763,14 +825,13 @@ footer {
   </div>
 </section>
 
-<!-- VISIT -->
 <section class="visit" id="visit">
   <div class="container">
     <div class="label reveal">Come See Us</div>
     <h2 class="reveal delay-1">Plan your <em>visit</em></h2>
     <div class="visit-grid">
       <div class="visit-card reveal">
-        <div class="visit-card-title">Hours</div>
+        <h3 class="visit-card-title">Hours</h3>
         <div class="hours-row"><span class="hours-day">Monday</span><span>7:30 AM – 5:00 PM</span></div>
         <div class="hours-row"><span class="hours-day">Tuesday</span><span>7:30 AM – 5:00 PM</span></div>
         <div class="hours-row"><span class="hours-day">Wednesday</span><span>7:30 AM – 5:00 PM</span></div>
@@ -785,9 +846,9 @@ footer {
         </div>
       </div>
       <div class="visit-card reveal delay-1">
-        <div class="visit-card-title">Contact</div>
+        <h3 class="visit-card-title">Contact</h3>
         <div class="contact-label">Address</div>
-        <div class="contact-val">3708 Cheek Sparger Rd #110<br>Bedford, TX</div>
+        <div class="contact-val">3708 Cheek Sparger Rd #110<br>Bedford, TX 76021</div>
         <div class="contact-label">Phone</div>
         <div class="contact-val"><a href="tel:6825034019">(682) 503-4019</a></div>
         <div class="contact-label">Email</div>
@@ -811,11 +872,10 @@ footer {
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div>
-      <img class="footer-logo" src="Untitled design.png" alt="Green Nest Cafe">
+      <img class="footer-logo" src="Untitled design.png" alt="Green Nest Cafe Logo Footer">
       <span class="footer-brand-name">Green Nest Cafe</span>
       <span class="footer-tagline">Sip, Relax &amp; Reflect · Bedford, Texas</span>
       <p class="footer-desc">A warm, cozy neighborhood cafe where every cup is made with care and every guest feels at home.</p>
@@ -832,9 +892,9 @@ footer {
     <div>
       <div class="footer-col-title">Hours</div>
       <ul class="footer-links">
-        <li><a href="#">Mon–Fri · 7:30–5:00</a></li>
-        <li><a href="#">Saturday · 7:30–6:00</a></li>
-        <li><a href="#">Sunday · 8:00–5:00</a></li>
+        <li><a href="#visit">Mon–Fri · 7:30–5:00</a></li>
+        <li><a href="#visit">Saturday · 7:30–6:00</a></li>
+        <li><a href="#visit">Sunday · 8:00–5:00</a></li>
       </ul>
     </div>
     <div>
@@ -863,10 +923,19 @@ window.addEventListener('scroll', () => {
 const burger = document.getElementById('burger');
 const mobileMenu = document.getElementById('mobileMenu');
 const menuClose = document.getElementById('menuClose');
-burger.addEventListener('click', () => mobileMenu.classList.add('open'));
-menuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+burger.addEventListener('click', () => {
+  mobileMenu.classList.add('open');
+  burger.setAttribute('aria-expanded', 'true');
+});
+menuClose.addEventListener('click', () => {
+  mobileMenu.classList.remove('open');
+  burger.setAttribute('aria-expanded', 'false');
+});
 mobileMenu.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  });
 });
 
 // Today highlight
@@ -879,9 +948,13 @@ document.querySelectorAll('.hours-day').forEach(el => {
 // Tabs
 document.querySelectorAll('.tab').forEach(tab => {
   tab.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => {
+      t.classList.remove('active');
+      t.setAttribute('aria-selected', 'false');
+    });
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
     tab.classList.add('active');
+    tab.setAttribute('aria-selected', 'true');
     document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
   });
 });
